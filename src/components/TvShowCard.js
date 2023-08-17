@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-const ShowCard = (props) => {
+const TvShowCard = (props) => {
   return (
     <div>
       <img src={props.data.image_thumbnail_path} />
@@ -13,4 +13,4 @@ const ShowCard = (props) => {
   );
 };
 
-export default ShowCard;
+export default TvShowCard;

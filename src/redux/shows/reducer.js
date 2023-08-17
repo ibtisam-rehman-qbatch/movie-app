@@ -18,19 +18,37 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
       };
 
-    case actions.EDIT_SHOW_BEGIN:
-      return { ...state, loading: true, success: null, error: null };
-
     case actions.ADD_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };
 
     case actions.ADD_SHOW_SUCCESS:
-      return { ...state, tvShows: [...state.tvShows, payload] };
+      return { ...state, tvShows: [...state.tvShows, payload], loading: false };
+
+    case actions.EDIT_SHOW_BEGIN:
+      return { ...state, loading: true, success: null, error: null };
+
+    case actions.EDIT_SHOW_SUCCESS: {
+      const { id, updatedTvShow } = payload;
+      const tvShowIndex = state.tvShows.findIndex((tvShow) => tvShow.id === id);
+      if (tvShowIndex !== -1) {
+        const updatedTvShows = [...state.tvShows];
+        updatedTvShows[tvShowIndex] = {
+          ...updatedTvShows[tvShowIndex],
+          ...updatedTvShow,
+        };
+        return {
+          ...state,
+          tvShows: updatedTvShows,
+          loading: false,
+        };
+      }
+      return state;
+    }
 
     case actions.DELETE_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };
 
-    case actions.DELETE_SHOW_SUCCESS:
+    case actions.DELETE_SHOW_SUCCESS: {
       const updatedTvShows = state.tvShows.filter(
         (show) => show.id !== payload
       );
@@ -38,13 +56,9 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         tvShows: updatedTvShows,
+        loading: false,
       };
-
-    // case actions.ADD_SHOW:
-    //   return [...state, { payload }];
-
-    // case actions.DELETE_SHOW:
-    //   return state.filter((show) => show.id !== payload.id);
+    }
 
     // case actions.API_ERROR:
 

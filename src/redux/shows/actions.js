@@ -31,10 +31,13 @@ const actions = {
     };
   },
 
-  editShowSuccess: (data) => {
+  editShowSuccess: (id, updatedTvShow) => {
     return {
       type: actions.EDIT_SHOW_SUCCESS,
-      payload: data,
+      payload: {
+        id,
+        updatedTvShow,
+      },
     };
   },
 

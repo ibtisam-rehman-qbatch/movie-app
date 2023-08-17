@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchAllShows } from "../redux/shows/actionCreator";
-import AllShows from "./AllShows";
+import AllTvShows from "./AllTvShows";
 
 const FetchData = () => {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const FetchData = () => {
     console.log("Dispatch called");
     dispatch(fetchAllShows());
   }, []);
-  return <AllShows />;
+  return <AllTvShows />;
 };
 
 export default FetchData;

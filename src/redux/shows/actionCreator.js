@@ -13,7 +13,8 @@ const fetchAllShows = () => {
         "https://www.episodate.com/api/most-popular"
       );
       if (isResponseSuccessful(response)) {
-        dispatch(actions.fetchShowsSuccess(response.data));
+        console.log("response.data: ", response.data.tv_shows);
+        dispatch(actions.fetchShowsSuccess(response.data.tv_shows));
       }
     } catch (error) {
       console.log("Error during fetching TV-Shows:  ", error);
@@ -28,10 +29,37 @@ const addTvShow = (data) => {
       dispatch(actions.addShowBegin());
 
       dispatch(actions.addShowSuccess(data));
-    } catch {
+    } catch (error) {
+      console.log("Error during adding tv-show: ", error);
       dispatch(actions.addShowsError());
     }
   };
 };
 
-export { fetchAllShows, addTvShow };
+const removeTvShow = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.deleteShowBegin());
+
+      dispatch(actions.deleteShowSuccess(id));
+    } catch (error) {
+      console.log("Error in removing tv-show: ", error);
+      dispatch(actions.addShowsError());
+    }
+  };
+};
+
+const editTvShow = (id, updatedTvShow) => {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.editShowBegin());
+
+      dispatch(actions.editShowSuccess(id, updatedTvShow));
+    } catch (error) {
+      console.log("Error during editing tv-show: ", error);
+      dispatch(actions.addShowsError());
+    }
+  };
+};
+
+export { fetchAllShows, addTvShow, removeTvShow, editTvShow };
