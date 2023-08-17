@@ -8,7 +8,6 @@ const isResponseSuccessful = (response) => {
 const fetchAllShows = () => {
   return async (dispatch) => {
     try {
-      console.log("Going to get data");
       dispatch(actions.fetchShowsBegin());
       const response = await Axios.get(
         "https://www.episodate.com/api/most-popular"
@@ -23,4 +22,16 @@ const fetchAllShows = () => {
   };
 };
 
-export { fetchAllShows };
+const addTvShow = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.addShowBegin());
+
+      dispatch(actions.addShowSuccess(data));
+    } catch {
+      dispatch(actions.addShowsError());
+    }
+  };
+};
+
+export { fetchAllShows, addTvShow };

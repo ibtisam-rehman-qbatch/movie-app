@@ -70,6 +70,13 @@ const actions = {
       payload: error,
     };
   },
+
+  addShowsError: (error) => {
+    return {
+      type: actions.API_ERROR,
+      payload: error,
+    };
+  },
 };
 
 export default actions;

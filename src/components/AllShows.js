@@ -1,19 +1,13 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAllShows } from "../redux/shows/actionCreator";
+import React from "react";
+import { useSelector } from "react-redux";
+
 import ShowCard from "./ShowCard";
 
 const AllShows = () => {
-  const dispatch = useDispatch();
   const allShows = useSelector((shows) => shows.showsReducer);
   console.log("Complete obj", allShows);
   console.log("TvShows obj: ", allShows.tvShows);
   console.log("Only shows: ", allShows.tvShows?.tv_shows?.[0]);
-
-  useEffect(() => {
-    console.log("Dispatch called");
-    dispatch(fetchAllShows());
-  }, []);
 
   return (
     <>

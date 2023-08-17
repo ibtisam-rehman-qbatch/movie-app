@@ -2,12 +2,12 @@ import React from "react";
 import "./App.css";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import AllShows from "./components/AllShows";
+import FetchData from "./components/FetchData";
 
 function App() {
   return (
     <Provider store={store}>
-      <AllShows />
+      <FetchData />
     </Provider>
   );
 }

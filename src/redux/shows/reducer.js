@@ -24,8 +24,21 @@ export default (state = initialState, { type, payload }) => {
     case actions.ADD_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };
 
+    case actions.ADD_SHOW_SUCCESS:
+      return { ...state, tvShows: [...state.tvShows, payload] };
+
     case actions.DELETE_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };
+
+    case actions.DELETE_SHOW_SUCCESS:
+      const updatedTvShows = state.tvShows.filter(
+        (show) => show.id !== payload
+      );
+
+      return {
+        ...state,
+        tvShows: updatedTvShows,
+      };
 
     // case actions.ADD_SHOW:
     //   return [...state, { payload }];
