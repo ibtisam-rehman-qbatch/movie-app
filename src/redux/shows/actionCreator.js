@@ -5,20 +5,20 @@ const isResponseSuccessful = (response) => {
   return response.status >= 200 && response.status < 300;
 };
 
-const fetchAllShows = () => {
+const fetchAllTvShows = () => {
   return async (dispatch) => {
     try {
-      dispatch(actions.fetchShowsBegin());
+      dispatch(actions.fetchTvShowsBegin());
       const response = await Axios.get(
         "https://www.episodate.com/api/most-popular"
       );
       if (isResponseSuccessful(response)) {
         console.log("response.data: ", response.data.tv_shows);
-        dispatch(actions.fetchShowsSuccess(response.data.tv_shows));
+        dispatch(actions.fetchTvShowsSuccess(response.data.tv_shows));
       }
     } catch (error) {
       console.log("Error during fetching TV-Shows:  ", error);
-      dispatch(actions.fetchShowsError());
+      dispatch(actions.fetchTvShowsError());
     }
   };
 };
@@ -26,12 +26,12 @@ const fetchAllShows = () => {
 const addTvShow = (data) => {
   return async (dispatch) => {
     try {
-      dispatch(actions.addShowBegin());
+      dispatch(actions.addTvShowBegin());
 
-      dispatch(actions.addShowSuccess(data));
+      dispatch(actions.addTvShowSuccess(data));
     } catch (error) {
       console.log("Error during adding tv-show: ", error);
-      dispatch(actions.addShowsError());
+      dispatch(actions.addTvShowsError());
     }
   };
 };
@@ -39,12 +39,12 @@ const addTvShow = (data) => {
 const removeTvShow = (id) => {
   return async (dispatch) => {
     try {
-      dispatch(actions.deleteShowBegin());
+      dispatch(actions.deleteTvShowBegin());
 
-      dispatch(actions.deleteShowSuccess(id));
+      dispatch(actions.deleteTvShowSuccess(id));
     } catch (error) {
       console.log("Error in removing tv-show: ", error);
-      dispatch(actions.addShowsError());
+      dispatch(actions.addTvShowsError());
     }
   };
 };
@@ -52,14 +52,37 @@ const removeTvShow = (id) => {
 const editTvShow = (id, updatedTvShow) => {
   return async (dispatch) => {
     try {
-      dispatch(actions.editShowBegin());
+      dispatch(actions.editTvShowBegin());
 
-      dispatch(actions.editShowSuccess(id, updatedTvShow));
+      dispatch(actions.editTvShowSuccess(id, updatedTvShow));
     } catch (error) {
       console.log("Error during editing tv-show: ", error);
-      dispatch(actions.addShowsError());
+      dispatch(actions.addTvShowsError());
     }
   };
 };
 
-export { fetchAllShows, addTvShow, removeTvShow, editTvShow };
+const searchTvShowAPI = (searchQuery) => {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.searchTvShowsAPIBegin());
+
+      const response = await Axios.get(
+        `https://www.episodate.com/api/search?q=${searchQuery}`
+      );
+
+      dispatch(actions.searchTvShowsAPISuccess(response.data.tv_shows));
+    } catch (error) {
+      console.log("Error during searching tv-show: ", error);
+      dispatch(actions.addTvShowsError());
+    }
+  };
+};
+
+export {
+  fetchAllTvShows,
+  addTvShow,
+  removeTvShow,
+  editTvShow,
+  searchTvShowAPI,
+};

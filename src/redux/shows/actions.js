@@ -1,39 +1,45 @@
 const actions = {
-  FETECH_SHOWS_BEGIN: "FETECH_SHOWS_BEGIN",
-  FETECH_SHOWS_SUCCESS: "FETECH_SHOWS_SUCCESS",
+  FETECH_TV_SHOWS_BEGIN: "FETECH_TV_SHOWS_BEGIN",
+  FETECH_TV_SHOWS_SUCCESS: "FETECH_TV_SHOWS_SUCCESS",
 
-  EDIT_SHOW_BEGIN: "EDIT_SHOW_BEGIN",
-  EDIT_SHOW_SUCCESS: "EDIT_SHOW_SUCCESS",
+  EDIT_TV_SHOW_BEGIN: "EDIT_TV_SHOW_BEGIN",
+  EDIT_TV_SHOW_SUCCESS: "EDIT_TV_SHOW_SUCCESS",
 
-  ADD_SHOW_BEGIN: "ADD_SHOW_BEGIN",
-  ADD_SHOW_SUCCESS: "ADD_SHOW_SUCCESS",
+  ADD_TV_SHOW_BEGIN: "ADD_TV_SHOW_BEGIN",
+  ADD_TV_SHOW_SUCCESS: "ADD_TV_SHOW_SUCCESS",
 
-  DELETE_SHOW_BEGIN: "DELETE_SHOW_BEGIN",
-  DELETE_SHOW_SUCCESS: "DELETE_SHOW_SUCCESS",
+  DELETE_TV_SHOW_BEGIN: "DELETE_TV_SHOW_BEGIN",
+  DELETE_TV_SHOW_SUCCESS: "DELETE_TV_SHOW_SUCCESS",
+
+  SEARCH_TV_SHOWS_BEGIN: "SEARCH_TV_SHOWS_BEGIN",
+  SEARCH_TV_SHOWS_SUCCESS: "SEARCH_TV_SHOWS_SUCCESS",
+
+  SEARCH_TV_SHOWS_API_BEGIN: "SEARCH_TV_SHOWS_API_BEGIN",
+  SEARCH_TV_SHOWS_API_SUCCESS: "SEARCH_TV_SHOWS_API_SUCCESS",
 
   API_ERROR: "API_ERROR",
 
-  fetchShowsBegin: () => {
+  fetchTvShowsBegin: () => {
     return {
-      type: actions.FETECH_SHOWS_BEGIN,
+      type: actions.FETECH_TV_SHOWS_BEGIN,
     };
   },
-  fetchShowsSuccess: (data) => {
+  fetchTvShowsSuccess: (data) => {
     return {
-      type: actions.FETECH_SHOWS_SUCCESS,
+      type: actions.FETECH_TV_SHOWS_SUCCESS,
       payload: data,
     };
   },
 
-  editShowBegin: () => {
+  editTvShowBegin: () => {
     return {
-      type: actions.EDIT_SHOW_BEGIN,
+      type: actions.EDIT_TV_SHOW_BEGIN,
     };
   },
 
-  editShowSuccess: (id, updatedTvShow) => {
+  editTvShowSuccess: (id, updatedTvShow) => {
     return {
-      type: actions.EDIT_SHOW_SUCCESS,
+      type: actions.EDIT_TV_SHOW_SUCCESS,
       payload: {
         id,
         updatedTvShow,
@@ -41,40 +47,66 @@ const actions = {
     };
   },
 
-  addShowBegin: () => {
+  addTvShowBegin: () => {
     return {
-      type: actions.ADD_SHOW_BEGIN,
+      type: actions.ADD_TV_SHOW_BEGIN,
     };
   },
 
-  addShowSuccess: (data) => {
+  addTvShowSuccess: (data) => {
     return {
-      type: actions.ADD_SHOW_SUCCESS,
+      type: actions.ADD_TV_SHOW_SUCCESS,
       payload: data,
     };
   },
 
-  deleteShowBegin: () => {
+  deleteTvShowBegin: () => {
     return {
-      type: actions.DELETE_SHOW_BEGIN,
+      type: actions.DELETE_TV_SHOW_BEGIN,
     };
   },
 
-  deleteShowSuccess: (data) => {
+  deleteTvShowSuccess: (data) => {
     return {
-      type: actions.DELETE_SHOW_SUCCESS,
+      type: actions.DELETE_TV_SHOW_SUCCESS,
       payload: data,
     };
   },
 
-  fetchShowsError: (error) => {
+  searchTvShowsBegin: () => {
+    return {
+      type: actions.ADD_TV_SHOW_BEGIN,
+    };
+  },
+
+  searchTvShowsSuccess: (searchQuery) => {
+    return {
+      type: actions.SEARCH_TV_SHOWS_SUCCESS,
+      payload: searchQuery,
+    };
+  },
+
+  searchTvShowsAPIBegin: () => {
+    return {
+      type: actions.SEARCH_TV_SHOWS_API_BEGIN,
+    };
+  },
+
+  searchTvShowsAPISuccess: (queryResult) => {
+    return {
+      type: actions.SEARCH_TV_SHOWS_API_SUCCESS,
+      payload: queryResult,
+    };
+  },
+
+  fetchTvShowsError: (error) => {
     return {
       type: actions.API_ERROR,
       payload: error,
     };
   },
 
-  addShowsError: (error) => {
+  addTvShowsError: (error) => {
     return {
       type: actions.API_ERROR,
       payload: error,

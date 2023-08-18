@@ -8,26 +8,22 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case actions.FETECH_SHOWS_BEGIN:
+    case actions.FETECH_TV_SHOWS_BEGIN:
       return { ...state, loading: true, success: null, error: null };
 
-    case actions.FETECH_SHOWS_SUCCESS:
-      return {
-        ...state,
-        tvShows: payload,
-        loading: false,
-      };
+    case actions.FETECH_TV_SHOWS_SUCCESS:
+      return { ...state, tvShows: payload, loading: false };
 
-    case actions.ADD_SHOW_BEGIN:
+    case actions.ADD_TV_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };
 
-    case actions.ADD_SHOW_SUCCESS:
+    case actions.ADD_TV_SHOW_SUCCESS:
       return { ...state, tvShows: [...state.tvShows, payload], loading: false };
 
-    case actions.EDIT_SHOW_BEGIN:
+    case actions.EDIT_TV_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };
 
-    case actions.EDIT_SHOW_SUCCESS: {
+    case actions.EDIT_TV_SHOW_SUCCESS: {
       const { id, updatedTvShow } = payload;
       const tvShowIndex = state.tvShows.findIndex((tvShow) => tvShow.id === id);
       if (tvShowIndex !== -1) {
@@ -45,10 +41,10 @@ export default (state = initialState, { type, payload }) => {
       return state;
     }
 
-    case actions.DELETE_SHOW_BEGIN:
+    case actions.DELETE_TV_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };
 
-    case actions.DELETE_SHOW_SUCCESS: {
+    case actions.DELETE_TV_SHOW_SUCCESS: {
       const updatedTvShows = state.tvShows.filter(
         (show) => show.id !== payload
       );
@@ -59,6 +55,27 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
       };
     }
+
+    case actions.SEARCH_TV_SHOWS_BEGIN:
+      return { ...state, loading: true, success: null, error: null };
+
+    case actions.SEARCH_TV_SHOWS_SUCCESS: {
+      const filteredTvShows = state.tvShows.filter((show) =>
+        show.name.toLowerCase().includes(payload.toLowerCase())
+      );
+
+      return {
+        ...state,
+        tvShows: filteredTvShows,
+        loading: false,
+      };
+    }
+
+    case actions.SEARCH_TV_SHOWS_API_BEGIN:
+      return { ...state, loading: true, success: null, error: null };
+
+    case actions.SEARCH_TV_SHOWS_API_SUCCESS:
+      return { ...state, tvShows: payload, loading: false };
 
     // case actions.API_ERROR:
 
