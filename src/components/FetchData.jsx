@@ -13,7 +13,7 @@ const FetchData = () => {
   return (
     <>
       <Header />
-      <main>
+      <main className="xs:mx-4 sm:mx-4 md:mx-8 lg:mx-24">
         <Outlet />
       </main>
     </>

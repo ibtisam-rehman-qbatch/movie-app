@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import TvShowCard from "./TvShowCard";
-import {  searchTvShowAPI } from "../redux/shows/actionCreator";
+import { searchTvShowAPI } from "../redux/shows/actionCreator";
 import Loader from "./Loader";
 
 const AllTvShows = () => {
@@ -23,7 +23,6 @@ const AllTvShows = () => {
   return (
     <>
       {" "}
-      <h1>AllShows</h1>
       <input
         type="text"
         // value={searchInputRef.current?.value}
@@ -31,16 +30,14 @@ const AllTvShows = () => {
       />
       <button onClick={handleSearch}>Search</button>
       {allShows?.loading ? (
-        <Loader/>
+        <Loader />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {allShows.tvShows?.map((tvShow, index) => (
-          <div key={index} >
-            
-            <TvShowCard data={tvShow} key={index} />
-        
-          </div>
-        ))}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          {allShows.tvShows?.map((tvShow, index) => (
+            <div key={index}>
+              <TvShowCard data={tvShow} key={index} />
+            </div>
+          ))}
         </div>
       )}
     </>
