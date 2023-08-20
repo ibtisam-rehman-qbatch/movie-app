@@ -21,7 +21,7 @@ const Pagination = () => {
 
     if (newEnd <= totalPages) {
       setCurrentPageRange({ start: newStart, end: newEnd });
-    } else {
+    } else if (newStart < totalPages) {
       setCurrentPageRange({ start: newStart, end: totalPages });
     }
   };
@@ -63,6 +63,7 @@ const Pagination = () => {
           : list.push(
               <a
                 href="#"
+                key={i}
                 aria-current="page"
                 onClick={() => loadContent(i)}
                 className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
@@ -140,4 +141,4 @@ const Pagination = () => {
   );
 };
 
-export default Pagination;
+export default React.memo(Pagination);

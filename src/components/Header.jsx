@@ -17,7 +17,7 @@ const Header = () => {
           <a href="https://flowbite.com/" className="flex items-center">
             <img src={movie_logo} className="h-8 mr-3" alt="Flowbite Logo" />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              IBTI-VERSE
+              CINEMA-VERSE
             </span>
           </a>
           <SearchBar />

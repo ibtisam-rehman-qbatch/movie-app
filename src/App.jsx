@@ -6,6 +6,7 @@ import Root from "./components/Root";
 import AddTvShow from "./components/AddTvShow";
 import AllTvShows from "./pages/AllTvShows";
 import SignUpPage from "./components/SignUpPage";
+import TvShowDetails from "./pages/TvShowDetails";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Root />}>
             <Route path="/add-tv-show" element={<AddTvShow />} />
             <Route path="/all-tv-shows" element={<AllTvShows />} />
+            <Route path="/tv-show-details/:id" element={<TvShowDetails />} />
             <Route path="/iii" element={<SignUpPage />} />
             {/* <Route path="/hovercounter" element={<HoverCounter />} />
             <Route path="/get-data" element={<GetData />} />

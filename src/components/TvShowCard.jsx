@@ -1,13 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
-// import { Link } from "react-router-dom";
+import React, { useState, Suspense } from "react";
 import DeleteConfirmation from "./DeleteConfirmation";
+import { NavLink } from "react-router-dom";
 
 const TvShowCard = (props) => {
   const [isConfirmationVisible, setConfirmationVisible] = useState(false);
-
-  const [toggle, setToggle] = useState(false);
-  console.log(toggle);
 
   //   const startDate = props.data.start_date?.split("-")[0];
   const startDate = props.data.start_date;
@@ -19,28 +16,30 @@ const TvShowCard = (props) => {
     return givenDate;
   };
 
+  const PosterImg = React.lazy(() =>
+    import(/* webpackChunkName: "posterImage" */ "./PosterImage")
+  );
+
   return (
     <>
-      <div className="w-full max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-full max-w-xs bg-white border border-gray-200 rounded-lg shadow ">
         <a href="#">
-          <img
-            className="w-full h-80 rounded-t-lg"
-            src={props.data.image_thumbnail_path}
-            alt="TV Show Poster"
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <PosterImg data={props.data} />
+          </Suspense>
         </a>
         <div className="px-5 pb-5">
           <a href="#">
             {/* <div className="grid grid-cols-3 grid-rows-2"> */}
-            <p className="text-xl  font-bold text-gray-900 dark:text-white overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <p className="text-xl  font-bold text-gray-900  overflow-hidden whitespace-nowrap overflow-ellipsis">
               {props.data.name}{" "}
             </p>
             {endDate ? (
-              <p className="text-l font-semibold tracking-tight text-gray-400 dark:text-white">
+              <p className="text-l font-semibold tracking-tight text-gray-400">
                 {calculateYear(startDate)} - {calculateYear(endDate)}
               </p>
             ) : (
-              <p className="text-l font-semibold tracking-tight text-gray-400 dark:text-white">
+              <p className="text-l font-semibold tracking-tight text-gray-400">
                 {calculateYear(startDate)} - Present
                 <span className=" w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
               </p>
@@ -70,9 +69,9 @@ const TvShowCard = (props) => {
               Delete
             </button>
 
-            <button
-              onClick={() => setToggle((state) => !state)}
-              className="text-black hover:bg-blue-900 hover:text-white border border-black focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-md text-xs px-3 py-2 mr-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            <NavLink
+              to={`/tv-show-details/${props.data.id}`}
+              className="text-black hover:bg-blue-900 hover:text-white border border-black focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-md text-xs px-3 py-2 mr-2 text-center inline-flex items-center"
             >
               <svg
                 className="-ml-0.5 mr-2 h-3 w-3"
@@ -84,7 +83,7 @@ const TvShowCard = (props) => {
                 <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
               </svg>
               Details
-            </button>
+            </NavLink>
             {isConfirmationVisible && (
               <DeleteConfirmation
                 data={{ id: props.data.id, setConfirmationVisible }}

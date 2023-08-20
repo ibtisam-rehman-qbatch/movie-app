@@ -13,7 +13,6 @@ const fetchAllTvShows = (pNum) => {
         `https://www.episodate.com/api/most-popular?page=${pNum}`
       );
       if (isResponseSuccessful(response)) {
-        console.log("response.data: ", response.data);
         dispatch(actions.fetchTvShowsSuccess(response.data));
       }
     } catch (error) {
@@ -79,10 +78,27 @@ const searchTvShowAPI = (searchQuery) => {
   };
 };
 
+const tvShowDetails = (searchQuery) => {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.tvShowDetailsBegin());
+      const response = await Axios.get(
+        `https://www.episodate.com/api/show-details?q=${searchQuery}`
+      );
+
+      dispatch(actions.tvShowDetailsSuccess(response.data.tvShow));
+    } catch (error) {
+      console.log("Error during Finding Tv-Show details");
+      dispatch(actions.addTvShowsError());
+    }
+  };
+};
+
 export {
   fetchAllTvShows,
   addTvShow,
   removeTvShow,
   editTvShow,
   searchTvShowAPI,
+  tvShowDetails,
 };

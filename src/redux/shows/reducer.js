@@ -2,6 +2,7 @@ import actions from "./actions";
 const initialState = {
   tvShows: [],
   summary: {},
+  tvShowDetail: {},
   loading: false,
   success: null,
   error: null,
@@ -86,6 +87,16 @@ export default (state = initialState, { type, payload }) => {
 
     case actions.SEARCH_TV_SHOWS_API_SUCCESS:
       return { ...state, tvShows: payload, loading: false };
+
+    case actions.TV_SHOW_DETAILS_BEGIN:
+      return { ...state, loading: true, success: null, error: null };
+
+    case actions.TV_SHOW_DETAILS_SUCCESS:
+      return {
+        ...state,
+        tvShowDetail: payload,
+        loading: false,
+      };
 
     // case actions.API_ERROR:
 

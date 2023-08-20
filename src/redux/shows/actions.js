@@ -17,6 +17,9 @@ const actions = {
   SEARCH_TV_SHOWS_API_BEGIN: "SEARCH_TV_SHOWS_API_BEGIN",
   SEARCH_TV_SHOWS_API_SUCCESS: "SEARCH_TV_SHOWS_API_SUCCESS",
 
+  TV_SHOW_DETAILS_BEGIN: "TV_SHOW_DETAILS_BEGIN",
+  TV_SHOW_DETAILS_SUCCESS: "TV_SHOW_DETAILS_SUCCESS",
+
   API_ERROR: "API_ERROR",
 
   fetchTvShowsBegin: () => {
@@ -96,6 +99,19 @@ const actions = {
     return {
       type: actions.SEARCH_TV_SHOWS_API_SUCCESS,
       payload: queryResult,
+    };
+  },
+
+  tvShowDetailsBegin: () => {
+    return {
+      type: actions.TV_SHOW_DETAILS_BEGIN,
+    };
+  },
+
+  tvShowDetailsSuccess: (data) => {
+    return {
+      type: actions.TV_SHOW_DETAILS_SUCCESS,
+      payload: data,
     };
   },
 
