@@ -4,7 +4,7 @@ import { fetchAllTvShows } from "../redux/shows/actionCreator";
 import { Outlet } from "react-router";
 import Header from "./Header";
 
-const FetchData = () => {
+const Root = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     console.log("Dispatch called");
@@ -20,4 +20,4 @@ const FetchData = () => {
   );
 };
 
-export default FetchData;
+export default Root;

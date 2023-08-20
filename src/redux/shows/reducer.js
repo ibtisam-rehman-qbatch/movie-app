@@ -1,6 +1,7 @@
 import actions from "./actions";
 const initialState = {
   tvShows: [],
+  summary: {},
   loading: false,
   success: null,
   error: null,
@@ -12,7 +13,16 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, loading: true, success: null, error: null };
 
     case actions.FETECH_TV_SHOWS_SUCCESS:
-      return { ...state, tvShows: payload, loading: false };
+      return {
+        ...state,
+        tvShows: payload.tv_shows,
+        summary: {
+          pages: payload.pages,
+          page: payload.page,
+          total: payload.total,
+        },
+        loading: false,
+      };
 
     case actions.ADD_TV_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };

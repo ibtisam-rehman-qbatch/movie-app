@@ -2,9 +2,9 @@ import React from "react";
 import "./App.css";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import FetchData from "./components/FetchData";
+import Root from "./components/Root";
 import AddTvShow from "./components/AddTvShow";
-import AllTvShows from "./components/AllTvShows";
+import AllTvShows from "./pages/AllTvShows";
 import SignUpPage from "./components/SignUpPage";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Provider store={store}>
         <Routes>
-          <Route path="/" element={<FetchData />}>
+          <Route path="/" element={<Root />}>
             <Route path="/add-tv-show" element={<AddTvShow />} />
             <Route path="/all-tv-shows" element={<AllTvShows />} />
             <Route path="/iii" element={<SignUpPage />} />

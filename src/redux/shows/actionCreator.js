@@ -5,16 +5,16 @@ const isResponseSuccessful = (response) => {
   return response.status >= 200 && response.status < 300;
 };
 
-const fetchAllTvShows = () => {
+const fetchAllTvShows = (pNum) => {
   return async (dispatch) => {
     try {
       dispatch(actions.fetchTvShowsBegin());
       const response = await Axios.get(
-        "https://www.episodate.com/api/most-popular"
+        `https://www.episodate.com/api/most-popular?page=${pNum}`
       );
       if (isResponseSuccessful(response)) {
-        console.log("response.data: ", response.data.tv_shows);
-        dispatch(actions.fetchTvShowsSuccess(response.data.tv_shows));
+        console.log("response.data: ", response.data);
+        dispatch(actions.fetchTvShowsSuccess(response.data));
       }
     } catch (error) {
       console.log("Error during fetching TV-Shows:  ", error);
