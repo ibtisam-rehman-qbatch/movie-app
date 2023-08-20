@@ -78,6 +78,19 @@ const searchTvShowAPI = (searchQuery) => {
   };
 };
 
+const sortTvShows = (field = "start_date") => {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.sortTvShowsBegin());
+
+      dispatch(actions.sortTvShowsSuccess(field));
+    } catch (error) {
+      console.log("Error during sorting tv-show: ", error);
+      dispatch(actions.addTvShowsError());
+    }
+  };
+};
+
 const tvShowDetails = (searchQuery) => {
   return async (dispatch) => {
     try {
@@ -101,4 +114,5 @@ export {
   editTvShow,
   searchTvShowAPI,
   tvShowDetails,
+  sortTvShows,
 };

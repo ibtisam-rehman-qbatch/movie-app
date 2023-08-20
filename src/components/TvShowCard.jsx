@@ -2,6 +2,7 @@
 import React, { useState, Suspense } from "react";
 import DeleteConfirmation from "./DeleteConfirmation";
 import { NavLink } from "react-router-dom";
+import { calculateYear } from "../utilities/utils";
 
 const TvShowCard = (props) => {
   const [isConfirmationVisible, setConfirmationVisible] = useState(false);
@@ -9,12 +10,6 @@ const TvShowCard = (props) => {
   //   const startDate = props.data.start_date?.split("-")[0];
   const startDate = props.data.start_date;
   const endDate = props.data.end_date;
-  const calculateYear = (givenDate) => {
-    if (givenDate?.split("-").length > 1) return givenDate?.split("-")[0];
-    else if (givenDate?.split("-").length === 1)
-      return givenDate?.split("/")?.[2];
-    return givenDate;
-  };
 
   const PosterImg = React.lazy(() =>
     import(/* webpackChunkName: "posterImage" */ "./PosterImage")

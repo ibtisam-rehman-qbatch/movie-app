@@ -1,4 +1,6 @@
 import actions from "./actions";
+import { calculateYear } from "../../utilities/utils";
+import { sortBy, toNumber } from "lodash";
 const initialState = {
   tvShows: [],
   summary: {},
@@ -98,6 +100,18 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
       };
 
+    case actions.SORT_TV_SHOWS_BEGIN:
+      return { ...state, loading: true, success: null, error: null };
+
+    case actions.SORT_TV_SHOWS_SUCCESS:
+      return {
+        ...state,
+        tvShows: sortBy(state.tvShows, (show) =>
+          toNumber(calculateYear(show.start_date))
+        ),
+
+        loading: false,
+      };
     // case actions.API_ERROR:
 
     default:

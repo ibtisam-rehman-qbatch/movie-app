@@ -20,6 +20,9 @@ const actions = {
   TV_SHOW_DETAILS_BEGIN: "TV_SHOW_DETAILS_BEGIN",
   TV_SHOW_DETAILS_SUCCESS: "TV_SHOW_DETAILS_SUCCESS",
 
+  SORT_TV_SHOWS_BEGIN: "SORT_TV_SHOWS_BEGIN",
+  SORT_TV_SHOWS_SUCCESS: "SORT_TV_SHOWS_SUCCESS",
+
   API_ERROR: "API_ERROR",
 
   fetchTvShowsBegin: () => {
@@ -78,7 +81,7 @@ const actions = {
 
   searchTvShowsBegin: () => {
     return {
-      type: actions.ADD_TV_SHOW_BEGIN,
+      type: actions.SEARCH_TV_SHOWS_BEGIN,
     };
   },
 
@@ -86,6 +89,19 @@ const actions = {
     return {
       type: actions.SEARCH_TV_SHOWS_SUCCESS,
       payload: searchQuery,
+    };
+  },
+
+  sortTvShowsBegin: () => {
+    return {
+      type: actions.SORT_TV_SHOWS_BEGIN,
+    };
+  },
+
+  sortTvShowsSuccess: (field) => {
+    return {
+      type: actions.SORT_TV_SHOWS_SUCCESS,
+      payload: field,
     };
   },
 
