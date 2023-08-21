@@ -3,16 +3,20 @@ import { useRef } from "react";
 import { searchTvShowAPI } from "../redux/shows/actionCreator";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { debounce } from "lodash";
 const SearchBar = () => {
   const searchInputRef = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    dispatch(searchTvShowAPI(searchInputRef.current.value));
-    navigate("/all-tv-shows");
+    if (searchInputRef.current.value) {
+      dispatch(searchTvShowAPI(searchInputRef.current.value));
+      navigate("/all-tv-shows");
+    }
   };
+
+  const debouncedHandleSearch = debounce(handleSearch, 900);
   return (
     <div className="flex md:order-2">
       <button
@@ -31,6 +35,7 @@ const SearchBar = () => {
           className=" p-2.5  w-full  text-sm text-gray-900 bg-white rounded-lg  border border-gray-300  focus:border-blue-500 "
           placeholder="Search..."
           ref={searchInputRef}
+          onChange={(e) => debouncedHandleSearch(e.target.value)}
           required
         />
         <button
