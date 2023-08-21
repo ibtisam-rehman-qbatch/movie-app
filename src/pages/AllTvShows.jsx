@@ -1,42 +1,63 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import TvShowCard from "../components/TvShowCard";
 import Loader from "../components/Loader";
 import Pagination from "../components/Pagination";
 import { orderBy, toNumber, groupBy } from "lodash";
 import { calculateYear } from "../utilities/utils";
+import NetworkList from "../components/NetworkList";
+import { reInit } from "../redux/shows/actionCreator";
 
 const AllTvShows = () => {
-  // const [tvShowList, setTvShowList]= useState(null);
+  const dispatch = useDispatch();
+  const [tvShowList, setTvShowList] = useState(null);
   let allShows = useSelector((shows) => shows.showsReducer);
+
   const sortedShows = orderBy(
     allShows.tvShows,
     (show) => toNumber(calculateYear(show?.start_date)),
     "desc"
   );
   const networkWiseShows = groupBy(allShows.tvShows, "network");
-  console.log("network: ", networkWiseShows);
   const availableNetworks = Object.keys(networkWiseShows);
-  console.log(availableNetworks);
 
   const [sortByYear, setSortByYear] = useState(false);
 
   const handleCheckboxChange = (event) => {
     const isChecked = event.target.checked;
     setSortByYear(isChecked);
+    if (isChecked) {
+      setTvShowList(sortedShows);
+    } else {
+      setTvShowList(allShows?.tvShows);
+    }
+  };
+
+  const handleChange = (name) => {
+    if (name) {
+      setTvShowList(networkWiseShows[name]);
+    } else {
+      setTvShowList(allShows?.tvShows);
+    }
   };
 
   useEffect(() => {
-    if (allShows?.error) window.alert(allShows?.error);
+    if (allShows?.error) {
+      window.alert(allShows?.error);
+      dispatch(reInit);
+    }
   }, [allShows?.error]);
 
   useEffect(() => {
-    if (allShows?.success) window.alert(allShows?.success);
+    if (allShows?.success) {
+      window.alert(allShows?.success);
+      dispatch(reInit());
+    }
   }, [allShows?.success]);
 
   return (
     <>
-      <div className="px-8">
+      <div className="px-8 flex justify-between">
         <div className="flex items-center">
           <input
             id="checked-checkbox"
@@ -52,13 +73,20 @@ const AllTvShows = () => {
             Sort By Year
           </label>
         </div>
-      </div>{" "}
+        <div className="flex items-center mr-4">
+          <NetworkList
+            handleChange={handleChange}
+            availableNetworks={availableNetworks}
+          />
+        </div>
+      </div>
+
       {allShows?.loading ? (
         <Loader />
       ) : (
         <div className="grid grid-cols-2 pt-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {sortByYear
-            ? sortedShows?.map((tvShow, index) => (
+          {tvShowList
+            ? tvShowList?.map((tvShow, index) => (
                 <div key={index}>
                   <TvShowCard data={tvShow} key={index} />
                 </div>
@@ -70,7 +98,7 @@ const AllTvShows = () => {
               ))}
         </div>
       )}
-      <Pagination />
+      <Pagination restore={setTvShowList} />
     </>
   );
 };

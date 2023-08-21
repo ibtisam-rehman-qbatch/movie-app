@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 
 const ImageSlider = ({ images, backUpImg }) => {
-  console.log("Bkup: ", backUpImg);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {

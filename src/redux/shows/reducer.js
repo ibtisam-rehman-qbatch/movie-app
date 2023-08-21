@@ -56,7 +56,7 @@ export default (state = initialState, { type, payload }) => {
           ...state,
           tvShows: updatedTvShows,
           loading: false,
-          success: true,
+          success: "TV show has edited Successfully",
           error: null,
         };
       }
@@ -76,6 +76,7 @@ export default (state = initialState, { type, payload }) => {
         tvShows: updatedTvShows,
         loading: false,
         success: "Tv Show has deleted Successfully",
+        // success: null,
         error: null,
       };
     }
@@ -92,7 +93,6 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         tvShows: filteredTvShows,
         loading: false,
-        success: true,
         error: null,
       };
     }
@@ -105,7 +105,6 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         tvShows: payload,
         loading: false,
-        success: true,
         error: null,
       };
 
@@ -117,7 +116,6 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         tvShowDetail: payload,
         loading: false,
-        success: true,
         error: null,
       };
 
@@ -134,6 +132,8 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
         error: null,
       };
+    case actions.REINITIALIZE:
+      return { ...state, success: null, loading: false, error: null };
     case actions.API_ERROR:
       return {
         ...state,

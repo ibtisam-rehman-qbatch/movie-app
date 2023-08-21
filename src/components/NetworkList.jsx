@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-const NetworkList = ({ handleChange }) => {
+const NetworkList = ({ handleChange, availableNetworks }) => {
   const listOfNetworks = [
     "Netflix",
     "HBO",
@@ -12,10 +12,12 @@ const NetworkList = ({ handleChange }) => {
     "NBC",
   ];
 
-  const getNetworks = () => {
-    return listOfNetworks.map((network, id) => (
+  const getNetworks = (networks) => {
+    return networks.map((network, id) => (
       <option
-        className="mb-4 w-full rounded-md bg-slate-300 p-2"
+        className={`mb-4 w-full rounded-md ${
+          availableNetworks ? "" : "bg-slate-300"
+        }  p-2`}
         value={network}
         key={id}
       >
@@ -25,16 +27,29 @@ const NetworkList = ({ handleChange }) => {
   };
   return (
     <select
-      className="mb-4 w-full rounded-md bg-slate-300 p-2"
+      className={`mb-4 w-full rounded-md ${
+        availableNetworks ? "" : "bg-slate-300"
+      } p-2`}
       id="network"
       name="network"
-      onChange={(e) => handleChange("network", e.target.value)}
+      onChange={(e) =>
+        availableNetworks
+          ? handleChange(e.target.value)
+          : handleChange("network", e.target.value)
+      }
       required
     >
-      <option className="mb-4 w-full rounded-md bg-slate-300 p-2" value="">
+      <option
+        className={`mb-4 w-full rounded-md ${
+          availableNetworks ? "" : "bg-slate-300"
+        } p-2`}
+        value=""
+      >
         Select Network of Tv Show
       </option>
-      {getNetworks()}
+      {availableNetworks
+        ? getNetworks(availableNetworks)
+        : getNetworks(listOfNetworks)}
     </select>
   );
 };

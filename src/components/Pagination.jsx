@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 // import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllTvShows } from "../redux/shows/actionCreator";
 
-const Pagination = () => {
+const Pagination = ({ restore }) => {
   const dispatch = useDispatch();
   const currPage = useSelector((shows) => shows.showsReducer.summary.page);
   const totalPages = useSelector((shows) => shows.showsReducer.summary.pages);
@@ -37,6 +38,7 @@ const Pagination = () => {
 
   const loadContent = (pageNum) => {
     dispatch(fetchAllTvShows(pageNum));
+    restore(null);
   };
   const pageNumber = () => {
     let list = [];

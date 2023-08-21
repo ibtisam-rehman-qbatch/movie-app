@@ -128,6 +128,20 @@ const tvShowDetails = (searchQuery) => {
   };
 };
 
+const reInit = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.reinitializeSuccess());
+    } catch (error) {
+      console.log("Error during einitializing Tv-Show state");
+      dispatch(actions.tvShowsError(error));
+      var raw =
+        '{"text": "There\'s error during reinitializing Tv-Show state"}';
+      slackNotification(raw);
+    }
+  };
+};
+
 export {
   fetchAllTvShows,
   addTvShow,
@@ -136,4 +150,5 @@ export {
   searchTvShowAPI,
   tvShowDetails,
   sortTvShows,
+  reInit,
 };

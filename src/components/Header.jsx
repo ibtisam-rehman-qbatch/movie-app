@@ -5,12 +5,6 @@ import movie_logo from "../assets/movie_logo.png";
 
 const Header = () => {
   return (
-    // <div className='App-header'>
-    //     <NavLink to='/add-tv-show'>Add TV-Show</NavLink>
-    //     <NavLink to='/all-tv-shows'>Show all TV-shows</NavLink>
-    //     <NavLink to='/iii'>Sign-Up page</NavLink>
-
-    // </div>
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -25,7 +19,7 @@ const Header = () => {
             className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
             id="navbar-search"
           >
-            <div className="relative mt-3 md:hidden">
+            {/* <div className="relative mt-3 md:hidden">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
                   className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -49,7 +43,7 @@ const Header = () => {
                 className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search..."
               />
-            </div>
+            </div> */}
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
                 <NavLink

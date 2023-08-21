@@ -23,6 +23,8 @@ const actions = {
   SORT_TV_SHOWS_BEGIN: "SORT_TV_SHOWS_BEGIN",
   SORT_TV_SHOWS_SUCCESS: "SORT_TV_SHOWS_SUCCESS",
 
+  REINITIALIZE: "REINITIALIZE",
+
   API_ERROR: "API_ERROR",
 
   fetchTvShowsBegin: () => {
@@ -135,6 +137,12 @@ const actions = {
     return {
       type: actions.API_ERROR,
       payload: error,
+    };
+  },
+
+  reinitializeSuccess: () => {
+    return {
+      type: actions.REINITIALIZE,
     };
   },
 };

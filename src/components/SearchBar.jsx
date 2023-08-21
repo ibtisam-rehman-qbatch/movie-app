@@ -25,10 +25,10 @@ const SearchBar = () => {
         <span className="sr-only">Search</span>
       </button>
 
-      <div className="relative w-full">
+      <div className="relative w-full sm: px-12">
         <input
           type="search"
-          className=" p-2.5 w-full  text-sm text-gray-900 bg-white rounded-lg  border border-gray-300  focus:border-blue-500 "
+          className=" p-2.5  w-full  text-sm text-gray-900 bg-white rounded-lg  border border-gray-300  focus:border-blue-500 "
           placeholder="Search..."
           ref={searchInputRef}
           required

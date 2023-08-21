@@ -42,7 +42,7 @@ const AddTvShow = () => {
   );
   // const category = useSelector((state) => state.Categories);
   const dispatch = useDispatch();
-  console.log(tvShowDetail);
+  //   console.log(tvShowDetail);
   // const nameRef = useRef();
   // const permalinkRef = useRef();
   // const passwordRef = useRef();
