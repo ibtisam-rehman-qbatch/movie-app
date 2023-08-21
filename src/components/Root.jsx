@@ -7,7 +7,6 @@ import Header from "./Header";
 const Root = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("Dispatch called");
     dispatch(fetchAllTvShows());
   }, []);
   return (

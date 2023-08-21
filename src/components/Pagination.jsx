@@ -42,7 +42,6 @@ const Pagination = ({ restore }) => {
   };
   const pageNumber = () => {
     let list = [];
-    console.log("total: ", currentPageRange);
 
     for (
       let i = currentPageRange.start;

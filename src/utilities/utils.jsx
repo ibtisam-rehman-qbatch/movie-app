@@ -5,7 +5,7 @@ export const calculateYear = (givenDate) => {
   return givenDate;
 };
 
-export const  slackNotification = (raw)=>{
+export const slackNotification = (raw) => {
   var requestOptions = {
     method: "POST",
     body: raw,
@@ -18,4 +18,4 @@ export const  slackNotification = (raw)=>{
     .then((response) => response.text())
     .then((result) => console.log(result))
     .catch((error) => console.log("error", error));
-}
+};

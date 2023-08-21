@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 
 const DeleteConfirmation = (props) => {
   const dispatch = useDispatch();
-  console.log("Deletion confirmation rendered");
 
   const handleDelete = (id) => {
     dispatch(removeTvShow(id));

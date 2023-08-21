@@ -12,7 +12,6 @@ const AllTvShows = () => {
   const dispatch = useDispatch();
   const [tvShowList, setTvShowList] = useState(null);
   let allShows = useSelector((shows) => shows.showsReducer);
-  console.log("all: ", allShows);
 
   const sortedShows = orderBy(
     allShows.tvShows,

@@ -17,7 +17,6 @@ const fetchAllTvShows = (pNum) => {
         dispatch(actions.fetchTvShowsSuccess(response.data));
       }
     } catch (error) {
-      console.log("Error during fetching TV-Shows:  ", error);
       dispatch(actions.tvShowsError(error));
 
       var raw = '{"text": "There\'s error during fetching Tv-Shows"}';
@@ -33,7 +32,6 @@ const addTvShow = (data) => {
 
       dispatch(actions.addTvShowSuccess(data));
     } catch (error) {
-      console.log("Error during adding tv-show: ", error);
       dispatch(actions.tvShowsError(error));
 
       var raw = '{"text": "There\'s error during adding a Tv-Show"}';
@@ -49,7 +47,6 @@ const removeTvShow = (id) => {
 
       dispatch(actions.deleteTvShowSuccess(id));
     } catch (error) {
-      console.log("Error in removing tv-show: ", error);
       dispatch(actions.tvShowsError(error));
 
       var raw = '{"text": "There\'s error during removing a Tv-Show"}';
@@ -65,7 +62,6 @@ const editTvShow = (id, updatedTvShow) => {
 
       dispatch(actions.editTvShowSuccess(id, updatedTvShow));
     } catch (error) {
-      console.log("Error during editing tv-show: ", error);
       dispatch(actions.tvShowsError(error));
 
       var raw = '{"text": "There\'s error during editing a Tv-Show Details"}';
@@ -85,7 +81,6 @@ const searchTvShowAPI = (searchQuery) => {
 
       dispatch(actions.searchTvShowsAPISuccess(response.data.tv_shows));
     } catch (error) {
-      console.log("Error during searching tv-show: ", error);
       dispatch(actions.tvShowsError(error));
       var raw = '{"text": "There\'s error during showing Searching a Tv Show"}';
       slackNotification(raw);
@@ -100,7 +95,6 @@ const sortTvShows = (field = "start_date") => {
 
       dispatch(actions.sortTvShowsSuccess(field));
     } catch (error) {
-      console.log("Error during sorting tv-show: ", error);
       dispatch(actions.tvShowsError(error));
 
       var raw = '{"text": "There\'s error during Sorting Tv-Shows"}';
@@ -119,7 +113,6 @@ const tvShowDetails = (searchQuery) => {
 
       dispatch(actions.tvShowDetailsSuccess(response.data.tvShow));
     } catch (error) {
-      console.log("Error during Finding Tv-Show details");
       dispatch(actions.tvShowsError(error));
 
       var raw = '{"text": "There\'s error during showing Tv-Show Details"}';
@@ -133,7 +126,6 @@ const reInit = () => {
     try {
       dispatch(actions.reinitializeSuccess());
     } catch (error) {
-      console.log("Error during einitializing Tv-Show state");
       dispatch(actions.tvShowsError(error));
       var raw =
         '{"text": "There\'s error during reinitializing Tv-Show state"}';
