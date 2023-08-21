@@ -31,14 +31,21 @@ export default (state = initialState, { type, payload }) => {
     case actions.ADD_TV_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };
 
-    case actions.ADD_TV_SHOW_SUCCESS:
+    case actions.ADD_TV_SHOW_SUCCESS: {
+      const newTotal = toNumber(state.summary.total) + 1;
+      payload.id = newTotal;
       return {
         ...state,
         tvShows: [...state.tvShows, payload],
+        summary: {
+          ...state.summary,
+          total: newTotal,
+        },
         loading: false,
         success: "Tv Show has added Successfully",
         error: null,
       };
+    }
 
     case actions.EDIT_TV_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };

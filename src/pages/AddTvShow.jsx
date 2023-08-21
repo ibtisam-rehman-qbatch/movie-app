@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import "../App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import CountryList from "../components/CountryList";
 import { addTvShow } from "../redux/shows/actionCreator";
@@ -54,7 +54,7 @@ const AddTvShow = () => {
     setTvShowDetail({ type: "SET_FIELD", field, value });
   };
 
-  const handleSubmit = () => {
+  const fillFields = async () => {
     tvShowDetail.end_date
       ? setTvShowDetail({ type: "SET_FIELD", field: "status", value: "Ended" })
       : setTvShowDetail({
@@ -62,7 +62,11 @@ const AddTvShow = () => {
           field: "status",
           value: "Running",
         });
-    setTvShowDetail({ type: "SET_FIELD", field: "id", value: { totalShows } });
+    setTvShowDetail({ type: "SET_FIELD", field: "id", value: totalShows });
+  };
+
+  const handleSubmit = async () => {
+    await fillFields();
     dispatch(addTvShow(tvShowDetail));
     navigate("/all-tv-shows");
   };
@@ -173,11 +177,6 @@ const AddTvShow = () => {
               Add TV-Show
             </button>
           </form>
-          <p className="mt-4">
-            <Link to="/all-tv-shows" className=" text-blue-500 underline">
-              ALL Tv-Shows
-            </Link>
-          </p>
         </div>
       </div>
     </>
