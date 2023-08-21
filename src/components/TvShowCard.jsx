@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, Suspense } from "react";
 import DeleteConfirmation from "./DeleteConfirmation";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { calculateYear } from "../utilities/utils";
 
 const TvShowCard = (props) => {
@@ -64,21 +64,41 @@ const TvShowCard = (props) => {
               Delete
             </button>
 
-            <NavLink
-              to={`/tv-show-details/${props.data.id}`}
-              className="text-black hover:bg-blue-900 hover:text-white border border-black focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-md text-xs px-3 py-2 mr-2 text-center inline-flex items-center"
-            >
-              <svg
-                className="-ml-0.5 mr-2 h-3 w-3"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 14"
+            {props.data?.myDate ? (
+              <button
+                onClick={() =>
+                  window.alert("You don't have any details of your own TV-Show")
+                }
+                className="text-black hover:bg-blue-900 hover:text-white border border-black focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-md text-xs px-3 py-2 mr-2 text-center inline-flex items-center"
               >
-                <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-              </svg>
-              Details
-            </NavLink>
+                <svg
+                  className="-ml-0.5 mr-2 h-3 w-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 14"
+                >
+                  <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
+                </svg>
+                Details
+              </button>
+            ) : (
+              <Link
+                to={`/tv-show-details/${props.data.id}`}
+                className="text-black hover:bg-blue-900 hover:text-white border border-black focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-md text-xs px-3 py-2 mr-2 text-center inline-flex items-center"
+              >
+                <svg
+                  className="-ml-0.5 mr-2 h-3 w-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 14"
+                >
+                  <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
+                </svg>
+                Details
+              </Link>
+            )}
             {isConfirmationVisible && (
               <DeleteConfirmation
                 data={{ id: props.data.id, setConfirmationVisible }}

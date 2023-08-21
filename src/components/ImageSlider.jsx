@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 
-const ImageSlider = ({ images }) => {
+const ImageSlider = ({ images, backUpImg }) => {
+  console.log("Bkup: ", backUpImg);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -22,14 +23,18 @@ const ImageSlider = ({ images }) => {
         className="flex transition-transform duration-500"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {images.map((image, index) => (
-          <img
-            key={index}
-            src={image}
-            alt={`Image ${index}`}
-            className="w-full h-full rounded-lg md:h-96 "
-          />
-        ))}
+        {images ? (
+          images.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Image ${index}`}
+              className="w-full h-full rounded-lg md:h-96 "
+            />
+          ))
+        ) : (
+          <img src={backUpImg} alt={`Poster`} className="w-full h-full  " />
+        )}
       </div>
 
       <button

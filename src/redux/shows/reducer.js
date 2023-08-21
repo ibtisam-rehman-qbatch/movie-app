@@ -25,13 +25,20 @@ export default (state = initialState, { type, payload }) => {
           total: payload.total,
         },
         loading: false,
+        error: null,
       };
 
     case actions.ADD_TV_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };
 
     case actions.ADD_TV_SHOW_SUCCESS:
-      return { ...state, tvShows: [...state.tvShows, payload], loading: false };
+      return {
+        ...state,
+        tvShows: [...state.tvShows, payload],
+        loading: false,
+        success: "Tv Show has added Successfully",
+        error: null,
+      };
 
     case actions.EDIT_TV_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };
@@ -49,6 +56,8 @@ export default (state = initialState, { type, payload }) => {
           ...state,
           tvShows: updatedTvShows,
           loading: false,
+          success: true,
+          error: null,
         };
       }
       return state;
@@ -66,6 +75,8 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         tvShows: updatedTvShows,
         loading: false,
+        success: "Tv Show has deleted Successfully",
+        error: null,
       };
     }
 
@@ -81,6 +92,8 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         tvShows: filteredTvShows,
         loading: false,
+        success: true,
+        error: null,
       };
     }
 
@@ -88,7 +101,13 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, loading: true, success: null, error: null };
 
     case actions.SEARCH_TV_SHOWS_API_SUCCESS:
-      return { ...state, tvShows: payload, loading: false };
+      return {
+        ...state,
+        tvShows: payload,
+        loading: false,
+        success: true,
+        error: null,
+      };
 
     case actions.TV_SHOW_DETAILS_BEGIN:
       return { ...state, loading: true, success: null, error: null };
@@ -98,6 +117,8 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         tvShowDetail: payload,
         loading: false,
+        success: true,
+        error: null,
       };
 
     case actions.SORT_TV_SHOWS_BEGIN:
@@ -109,10 +130,17 @@ export default (state = initialState, { type, payload }) => {
         tvShows: sortBy(state.tvShows, (show) =>
           toNumber(calculateYear(show.start_date))
         ),
-
+        success: true,
         loading: false,
+        error: null,
       };
-    // case actions.API_ERROR:
+    case actions.API_ERROR:
+      return {
+        ...state,
+        error: payload,
+        loading: false,
+        success: false,
+      };
 
     default:
       return state;

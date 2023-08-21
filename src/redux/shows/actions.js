@@ -131,14 +131,7 @@ const actions = {
     };
   },
 
-  fetchTvShowsError: (error) => {
-    return {
-      type: actions.API_ERROR,
-      payload: error,
-    };
-  },
-
-  addTvShowsError: (error) => {
+  tvShowsError: (error) => {
     return {
       type: actions.API_ERROR,
       payload: error,

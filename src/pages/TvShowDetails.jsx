@@ -30,7 +30,10 @@ const TvShowDetails = () => {
             <div />
             <div className="flex  p-12 justify-between lg:space-x-12   lg:flex-row md:flex-col  md:space-y-8 sm:items-center sm:space-y-8 sm:flex-col  xs:items-center xs:space-y-6 xs:flex-col">
               <Suspense fallback={<div>loading...</div>}>
-                <ImageSlider images={stateData?.tvShowDetail?.pictures} />
+                <ImageSlider
+                  images={stateData?.tvShowDetail?.pictures}
+                  backUpImg={stateData?.tvShowDetail?.image_thumbnail_path}
+                />
               </Suspense>
               <div className="h-full lg:w-2/3">
                 <p className="mb-4 text-lg  dark:text-gray-400 font-bold">

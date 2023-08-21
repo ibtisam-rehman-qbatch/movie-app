@@ -1,11 +1,14 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 
-const CountryList = () => {
+const CountryList = ({handleChange}) => {
   return (
     <select
       className="mb-4 w-full rounded-md bg-slate-300 p-2"
       id="country"
       name="country"
+      onChange={(e) => handleChange("country", e.target.value)}
+      required
     >
       <option className="mb-4 w-full rounded-md bg-slate-300 p-2" value="">
         Select Country

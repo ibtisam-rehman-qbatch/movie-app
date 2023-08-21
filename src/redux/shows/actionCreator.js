@@ -1,5 +1,6 @@
 import Axios from "axios";
 import actions from "./actions";
+import { slackNotification } from "../../utilities/utils";
 
 const isResponseSuccessful = (response) => {
   return response.status >= 200 && response.status < 300;
@@ -17,7 +18,10 @@ const fetchAllTvShows = (pNum) => {
       }
     } catch (error) {
       console.log("Error during fetching TV-Shows:  ", error);
-      dispatch(actions.fetchTvShowsError());
+      dispatch(actions.tvShowsError(error));
+
+      var raw = '{"text": "There\'s error during fetching Tv-Shows"}';
+      slackNotification(raw);
     }
   };
 };
@@ -30,7 +34,10 @@ const addTvShow = (data) => {
       dispatch(actions.addTvShowSuccess(data));
     } catch (error) {
       console.log("Error during adding tv-show: ", error);
-      dispatch(actions.addTvShowsError());
+      dispatch(actions.tvShowsError(error));
+
+      var raw = '{"text": "There\'s error during adding a Tv-Show"}';
+      slackNotification(raw);
     }
   };
 };
@@ -43,7 +50,10 @@ const removeTvShow = (id) => {
       dispatch(actions.deleteTvShowSuccess(id));
     } catch (error) {
       console.log("Error in removing tv-show: ", error);
-      dispatch(actions.addTvShowsError());
+      dispatch(actions.tvShowsError(error));
+
+      var raw = '{"text": "There\'s error during removing a Tv-Show"}';
+      slackNotification(raw);
     }
   };
 };
@@ -56,7 +66,10 @@ const editTvShow = (id, updatedTvShow) => {
       dispatch(actions.editTvShowSuccess(id, updatedTvShow));
     } catch (error) {
       console.log("Error during editing tv-show: ", error);
-      dispatch(actions.addTvShowsError());
+      dispatch(actions.tvShowsError(error));
+
+      var raw = '{"text": "There\'s error during editing a Tv-Show Details"}';
+      slackNotification(raw);
     }
   };
 };
@@ -73,7 +86,9 @@ const searchTvShowAPI = (searchQuery) => {
       dispatch(actions.searchTvShowsAPISuccess(response.data.tv_shows));
     } catch (error) {
       console.log("Error during searching tv-show: ", error);
-      dispatch(actions.addTvShowsError());
+      dispatch(actions.tvShowsError(error));
+      var raw = '{"text": "There\'s error during showing Searching a Tv Show"}';
+      slackNotification(raw);
     }
   };
 };
@@ -86,7 +101,10 @@ const sortTvShows = (field = "start_date") => {
       dispatch(actions.sortTvShowsSuccess(field));
     } catch (error) {
       console.log("Error during sorting tv-show: ", error);
-      dispatch(actions.addTvShowsError());
+      dispatch(actions.tvShowsError(error));
+
+      var raw = '{"text": "There\'s error during Sorting Tv-Shows"}';
+      slackNotification(raw);
     }
   };
 };
@@ -102,7 +120,10 @@ const tvShowDetails = (searchQuery) => {
       dispatch(actions.tvShowDetailsSuccess(response.data.tvShow));
     } catch (error) {
       console.log("Error during Finding Tv-Show details");
-      dispatch(actions.addTvShowsError());
+      dispatch(actions.tvShowsError(error));
+
+      var raw = '{"text": "There\'s error during showing Tv-Show Details"}';
+      slackNotification(raw);
     }
   };
 };

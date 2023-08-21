@@ -2,13 +2,16 @@ import React from "react";
 import { useRef } from "react";
 import { searchTvShowAPI } from "../redux/shows/actionCreator";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const searchInputRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     dispatch(searchTvShowAPI(searchInputRef.current.value));
+    navigate("/all-tv-shows");
   };
   return (
     <div className="flex md:order-2">
