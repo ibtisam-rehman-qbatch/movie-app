@@ -28,7 +28,7 @@ const TvShowDetails = () => {
               {stateData?.tvShowDetail?.name}
             </h1>
             <div />
-            <div className="flex  lg:p-12 lg:justify-between lg:space-x-12   lg:flex-row md:flex-col  md:space-y-8 sm:items-center sm:space-y-8 sm:flex-col">
+            <div className="flex  lg:p-12 lg:justify-between lg:space-x-12   lg:flex-row md:flex-col  md:space-y-8 items-center space-y-8 flex-col">
               <Suspense fallback={<div>loading...</div>}>
                 <ImageSlider
                   images={stateData?.tvShowDetail?.pictures}

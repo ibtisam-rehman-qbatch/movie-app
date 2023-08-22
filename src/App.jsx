@@ -15,6 +15,10 @@ const TvShowDetails = React.lazy(() =>
   import(/* webpackChunkName: "addTvShow " */ "./pages/TvShowDetails")
 );
 
+const Dummy = React.lazy(() =>
+  import(/* webpackChunkName: "dummy " */ "./components/Dummy")
+);
+
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +29,7 @@ function App() {
               <Route path="/add-tv-show" element={<AddTvShow />} />
               <Route path="/all-tv-shows" element={<AllTvShows />} />
               <Route path="/tv-show-details/:id" element={<TvShowDetails />} />
+              <Route path="/dummy" element={<Dummy />} />
             </Route>
           </Routes>
         </Suspense>

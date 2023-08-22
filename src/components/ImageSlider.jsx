@@ -17,7 +17,7 @@ const ImageSlider = ({ images, backUpImg }) => {
   };
 
   return (
-    <div className="relative w-full h-full sm:w-3/5 sm:h-3/5 md:w-2/3 md:h-2/3  lg:w-2/6 lg:h-2/6 overflow-hidden">
+    <div className="relative  h-full w-3/5 sm:h-3/5 md:w-2/3 md:h-2/3  lg:w-2/6 lg:h-2/6 overflow-hidden">
       <div
         className="flex transition-transform duration-500"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}

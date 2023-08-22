@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-const NetworkList = ({ handleChange, availableNetworks }) => {
+const NetworkList = ({ handleChange, availableNetworks, labelText }) => {
   const listOfNetworks = [
     "Netflix",
     "HBO",
@@ -28,7 +28,7 @@ const NetworkList = ({ handleChange, availableNetworks }) => {
   return (
     <select
       className={`mb-4 w-full rounded-md ${
-        availableNetworks ? "" : "bg-slate-300"
+        availableNetworks ? "border" : "bg-slate-300"
       } p-2`}
       id="network"
       name="network"
@@ -45,7 +45,7 @@ const NetworkList = ({ handleChange, availableNetworks }) => {
         } p-2`}
         value=""
       >
-        Select Network of Tv Show
+        {labelText ? labelText : "Select Network of Tv Show"}
       </option>
       {availableNetworks
         ? getNetworks(availableNetworks)
