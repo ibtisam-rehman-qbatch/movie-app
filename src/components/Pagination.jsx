@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-// import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchAllTvShows } from "../redux/shows/actionCreator";
 
@@ -48,31 +47,21 @@ const Pagination = ({ restore }) => {
       i <= currentPageRange.end && i <= totalPages;
       i++
     ) {
-      {
-        currPage === i
-          ? list.push(
-              <a
-                key={i}
-                href="#"
-                aria-current="page"
-                onClick={() => loadContent(i)}
-                className="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                {i}
-              </a>
-            )
-          : list.push(
-              <a
-                href="#"
-                key={i}
-                aria-current="page"
-                onClick={() => loadContent(i)}
-                className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-              >
-                {i}
-              </a>
-            );
-      }
+      list.push(
+        <a
+          key={i}
+          href="#"
+          aria-current="page"
+          onClick={() => loadContent(i)}
+          className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
+            currPage === i
+              ? "z-10  bg-indigo-600 text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+          } `}
+        >
+          {i}
+        </a>
+      );
     }
     return list;
   };

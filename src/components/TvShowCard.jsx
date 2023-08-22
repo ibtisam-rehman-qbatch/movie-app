@@ -25,7 +25,6 @@ const TvShowCard = (props) => {
         </a>
         <div className="px-5 pb-5">
           <a href="#">
-            {/* <div className="grid grid-cols-3 grid-rows-2"> */}
             <p className="text-xl  font-bold text-gray-900  overflow-hidden whitespace-nowrap overflow-ellipsis">
               {props.data.name}{" "}
             </p>
@@ -39,7 +38,6 @@ const TvShowCard = (props) => {
                 <span className=" w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
               </p>
             )}
-            {/* </div> */}
           </a>
 
           <div className=" items-center justify-between flex ">

@@ -73,7 +73,7 @@ const AllTvShows = () => {
             Sort By Year
           </label>
         </div>
-        <div className="flex items-center mr-4">
+        <div className="flex items-center mr-4 pt-4">
           <NetworkList
             handleChange={handleChange}
             availableNetworks={availableNetworks}

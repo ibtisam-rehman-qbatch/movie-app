@@ -40,15 +40,7 @@ const AddTvShow = () => {
     tvShowReducer,
     initialState
   );
-  // const category = useSelector((state) => state.Categories);
   const dispatch = useDispatch();
-  //   console.log(tvShowDetail);
-  // const nameRef = useRef();
-  // const permalinkRef = useRef();
-  // const passwordRef = useRef();
-  // const countryRef = useRef()
-  // const networkRef = useRef()
-  // const statusRef = useRef()
 
   const handleChange = (field, value) => {
     setTvShowDetail({ type: "SET_FIELD", field, value });

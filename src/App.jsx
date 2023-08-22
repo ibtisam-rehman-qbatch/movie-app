@@ -3,7 +3,6 @@ import "./App.css";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import Root from "./components/Root";
-import SignUpPage from "./components/SignUpPage";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 const AllTvShows = React.lazy(() =>
@@ -26,7 +25,6 @@ function App() {
               <Route path="/add-tv-show" element={<AddTvShow />} />
               <Route path="/all-tv-shows" element={<AllTvShows />} />
               <Route path="/tv-show-details/:id" element={<TvShowDetails />} />
-              <Route path="/iii" element={<SignUpPage />} />
             </Route>
           </Routes>
         </Suspense>
