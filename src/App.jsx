@@ -15,8 +15,8 @@ const TvShowDetails = React.lazy(() =>
   import(/* webpackChunkName: "addTvShow " */ "./pages/TvShowDetails")
 );
 
-const Dummy = React.lazy(() =>
-  import(/* webpackChunkName: "dummy " */ "./components/Dummy")
+const Page404 = React.lazy(() =>
+  import(/* webpackChunkName: "page404 " */ "./components/Page404")
 );
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
               <Route path="/add-tv-show" element={<AddTvShow />} />
               <Route path="/all-tv-shows" element={<AllTvShows />} />
               <Route path="/tv-show-details/:id" element={<TvShowDetails />} />
-              <Route path="/dummy" element={<Dummy />} />
+              <Route path="/*" element={<Page404 />} />
             </Route>
           </Routes>
         </Suspense>

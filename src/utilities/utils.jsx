@@ -1,3 +1,4 @@
+import Axios from "axios";
 export const calculateYear = (givenDate) => {
   if (givenDate?.split("-").length > 1) return givenDate?.split("-")[0];
   else if (givenDate?.split("-").length === 1)
@@ -5,17 +6,20 @@ export const calculateYear = (givenDate) => {
   return givenDate;
 };
 
-export const slackNotification = (raw) => {
-  var requestOptions = {
-    method: "POST",
-    body: raw,
-    redirect: "follow",
+export const slackNotification = (data) => {
+  const config = {
+    method: "post",
+    url: "https://hooks.slack.com/services/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",
+    headers: {
+      "Content-Type": "text/plain",
+    },
+    data: data,
   };
-  fetch(
-    "https://hooks.slack.com/services/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",
-    requestOptions
-  )
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
+  Axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };

@@ -1,6 +1,6 @@
 import actions from "./actions";
 import { calculateYear } from "../../utilities/utils";
-import { sortBy, toNumber } from "lodash";
+import { sortBy, toNumber, takeWhile, unionBy } from "lodash";
 const initialState = {
   tvShows: [],
   summary: {},
@@ -9,16 +9,18 @@ const initialState = {
   success: null,
   error: null,
 };
-
+let myTvShowId = 0;
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case actions.FETECH_TV_SHOWS_BEGIN:
       return { ...state, loading: true, success: null, error: null };
 
-    case actions.FETECH_TV_SHOWS_SUCCESS:
+    case actions.FETECH_TV_SHOWS_SUCCESS: {
+      const myTvShows = takeWhile(state.tvShows, (tvShow) => tvShow.id < 0);
+
       return {
         ...state,
-        tvShows: payload.tv_shows,
+        tvShows: unionBy(myTvShows, payload.tv_shows, "id"),
         summary: {
           pages: payload.pages,
           page: payload.page,
@@ -27,16 +29,18 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
         error: null,
       };
+    }
 
     case actions.ADD_TV_SHOW_BEGIN:
       return { ...state, loading: true, success: null, error: null };
 
     case actions.ADD_TV_SHOW_SUCCESS: {
       const newTotal = toNumber(state.summary.total) + 1;
-      payload.id = newTotal;
+      myTvShowId = myTvShowId - 1;
+      payload.id = myTvShowId;
       return {
         ...state,
-        tvShows: [...state.tvShows, payload],
+        tvShows: [payload, ...state.tvShows],
         summary: {
           ...state.summary,
           total: newTotal,
@@ -110,7 +114,12 @@ export default (state = initialState, { type, payload }) => {
     case actions.SEARCH_TV_SHOWS_API_SUCCESS:
       return {
         ...state,
-        tvShows: payload,
+        tvShows: payload.tv_shows,
+        summary: {
+          pages: payload.pages,
+          page: payload.page,
+          total: payload.total,
+        },
         loading: false,
         error: null,
       };

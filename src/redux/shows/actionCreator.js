@@ -70,16 +70,16 @@ const editTvShow = (id, updatedTvShow) => {
   };
 };
 
-const searchTvShowAPI = (searchQuery) => {
+const searchTvShowAPI = (searchQuery, pageNum) => {
   return async (dispatch) => {
     try {
       dispatch(actions.searchTvShowsAPIBegin());
 
       const response = await Axios.get(
-        `https://www.episodate.com/api/search?q=${searchQuery}`
+        `https://www.episodate.com/api/search?q=${searchQuery}&page=${pageNum}`
       );
 
-      dispatch(actions.searchTvShowsAPISuccess(response.data.tv_shows));
+      dispatch(actions.searchTvShowsAPISuccess(response.data));
     } catch (error) {
       dispatch(actions.tvShowsError(error));
       var raw = '{"text": "There\'s error during showing Searching a Tv Show"}';

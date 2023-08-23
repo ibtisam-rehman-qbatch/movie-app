@@ -58,9 +58,17 @@ const AddTvShow = () => {
   };
 
   const handleSubmit = async () => {
-    await fillFields();
-    dispatch(addTvShow(tvShowDetail));
-    navigate("/all-tv-shows");
+    if (
+      tvShowDetail.name &&
+      tvShowDetail.permalink &&
+      tvShowDetail.start_date &&
+      tvShowDetail.country &&
+      tvShowDetail.network
+    ) {
+      await fillFields();
+      dispatch(addTvShow(tvShowDetail));
+      navigate("/all-tv-shows");
+    }
   };
 
   const handleImageChange = async (event) => {
@@ -163,7 +171,7 @@ const AddTvShow = () => {
 
             <button
               className="w-1/2 rounded-full bg-slate-500 px-4 py-2 text-white hover:bg-slate-600"
-              type="submit"
+              // type="submit"
               onClick={handleSubmit}
             >
               Add TV-Show

@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchAllTvShows } from "../redux/shows/actionCreator";
+import { useSelector } from "react-redux";
 
-const Pagination = ({ restore }) => {
-  const dispatch = useDispatch();
+import { useNavigate } from "react-router-dom";
+
+const Pagination = ({ searchParam }) => {
+  const navigate = useNavigate();
+
   const currPage = useSelector((shows) => shows.showsReducer.summary.page);
   const totalPages = useSelector((shows) => shows.showsReducer.summary.pages);
 
@@ -36,8 +38,8 @@ const Pagination = ({ restore }) => {
   };
 
   const loadContent = (pageNum) => {
-    dispatch(fetchAllTvShows(pageNum));
-    restore(null);
+    navigate(`/all-tv-shows?search=${searchParam}&page=${pageNum}`);
+    // restore(null);
   };
   const pageNumber = () => {
     let list = [];
@@ -67,19 +69,25 @@ const Pagination = ({ restore }) => {
   };
   const loadNextPageContent = () => {
     if (currPage < totalPages) {
-      dispatch(fetchAllTvShows(currPage + 1));
+      // dispatch(fetchAllTvShows(currPage + 1));
+      if (searchParam)
+        navigate(`/all-tv-shows?search=${searchParam}&page=${currPage + 1}`);
+      else navigate(`/all-tv-shows?page=${currPage + 1}`);
       currPage + 1 > currentPageRange.end && goToNextPageRange();
     }
   };
   const loadPrevPageContent = () => {
     if (currPage > 1) {
-      dispatch(fetchAllTvShows(currPage - 1));
+      // dispatch(fetchAllTvShows(currPage - 1));
+      if (searchParam)
+        navigate(`/all-tv-shows?search=${searchParam}&page=${currPage - 1}`);
+      else navigate(`/all-tv-shows?page=${currPage - 1}`);
       currPage - 1 < currentPageRange.start && goToPrevPageRange();
     }
   };
 
   return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+    <div className="flex items-center justify-between   bg-gray-50 px-4 py-6 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
         <a
           href="#"

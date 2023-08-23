@@ -1,54 +1,84 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NetworkList from "./NetworkList";
-import { orderBy, toNumber, groupBy } from "lodash";
+import { orderBy, toNumber, groupBy, intersection } from "lodash";
 import { calculateYear } from "../utilities/utils";
 
-const FilterSection = ({ allShows, setTvShowList }) => {
-  const networkWiseShows = groupBy(allShows.tvShows, "network");
+const FilterSection = (props) => {
+  // console.log(props.data.country, props.data.network, props.data.isSorted);
+
+  const networkWiseShows = groupBy(props.data.allShows, "network");
   const availableNetworks = Object.keys(networkWiseShows);
 
-  const countryWiseShows = groupBy(allShows.tvShows, "country");
+  const countryWiseShows = groupBy(props.data.allShows, "country");
   const availableCountries = Object.keys(countryWiseShows);
 
-  const [sortByYear, setSortByYear] = useState(false);
+  const [sortByYear, setSortByYear] = useState(props.data.isSorted);
+  const [countrySelected, setCountry] = useState(props.data.country);
+  const [networkSelected, setNetwork] = useState(props.data.network);
+
+  useEffect(() => {
+    handleChangeFilters({
+      country: props.data.country,
+      network: props.data.network,
+      sorted: props.data.isSorted,
+    });
+  }, [props.data.country, props.data.network, props.data.isSorted]);
 
   const handleCheckboxChange = (event) => {
     const isChecked = event.target.checked;
     setSortByYear(isChecked);
-    if (isChecked) {
-      setTvShowList(sortedShows);
-    } else {
-      setTvShowList(allShows?.tvShows);
-    }
+    handleChangeFilters({
+      country: countrySelected,
+      network: networkSelected,
+      sorted: isChecked,
+    });
   };
 
-  const sortedShows = orderBy(
-    allShows.tvShows,
-    (show) => toNumber(calculateYear(show?.start_date)),
-    "desc"
-  );
+  const handleChangeFilters = ({ country, network, sorted }) => {
+    let filteredShows = props.data.allShows;
+    // console.log("APPLYING FILTER");
+    if (country) {
+      filteredShows = intersection(countryWiseShows[country], filteredShows);
+    }
+
+    if (network) {
+      filteredShows = intersection(networkWiseShows[network], filteredShows);
+    }
+
+    if (sorted) {
+      filteredShows = orderBy(
+        filteredShows,
+        (show) => toNumber(calculateYear(show?.start_date)),
+        "desc"
+      );
+    }
+
+    setCountry(country);
+    setNetwork(network);
+    props.data.setTvShowList(filteredShows);
+  };
 
   const handleChangeCountry = (name) => {
-    if (name) {
-      setTvShowList(countryWiseShows[name]);
-    } else {
-      setTvShowList(allShows?.tvShows);
-    }
+    handleChangeFilters({
+      country: name,
+      network: networkSelected,
+      sorted: sortByYear,
+    });
   };
 
   const handleChangeNetwork = (name) => {
-    if (name) {
-      setTvShowList(networkWiseShows[name]);
-    } else {
-      setTvShowList(allShows?.tvShows);
-    }
+    handleChangeFilters({
+      country: countrySelected,
+      network: name,
+      sorted: sortByYear,
+    });
   };
 
   return (
     <div>
-      <div className="px-8 flex justify-between">
-        <div className="flex items-center">
+      <div className="lg:px-8 flex flex-col lg:flex-row justify-between">
+        <div className="flex pt-4 lg:pt-0 items-center">
           <input
             id="checked-checkbox"
             type="checkbox"

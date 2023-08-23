@@ -42,7 +42,7 @@ const NetworkList = ({ handleChange, availableNetworks, labelText }) => {
       <option
         className={`mb-4 w-full rounded-md ${
           availableNetworks ? "" : "bg-slate-300"
-        } p-2`}
+        } p-4`}
         value=""
       >
         {labelText ? labelText : "Select Network of Tv Show"}

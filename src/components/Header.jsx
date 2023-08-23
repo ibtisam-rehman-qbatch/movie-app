@@ -29,9 +29,6 @@ const Header = () => {
             <NavLink to="/add-tv-show" className={navButtonStyle}>
               Add TV Show
             </NavLink>
-            <NavLink to="/dummy" className={navButtonStyle}>
-              Dummy
-            </NavLink>
           </div>
         </div>
       </nav>
