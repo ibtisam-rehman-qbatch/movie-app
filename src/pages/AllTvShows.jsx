@@ -5,6 +5,8 @@ import Loader from "../components/Loader";
 import Pagination from "../components/Pagination";
 import FilterSection from "../components/FilterSection";
 import Page404 from "../components/Page404";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   reInit,
@@ -31,23 +33,15 @@ const AllTvShows = () => {
 
   useEffect(() => {
     if (allShows?.error) {
-      window.alert(allShows?.error);
+      toast.error(allShows?.error);
       dispatch(reInit());
     } else if (allShows?.success) {
-      window.alert(allShows?.success);
+      toast.success(allShows?.success);
       dispatch(reInit());
-    }
-    if (searchParam) {
-      dispatch(
-        searchParam
-          ? searchTvShowAPI(searchParam, pageParam)
-          : fetchAllTvShows(pageParam)
-      );
     }
   }, [allShows?.error, allShows?.success]);
 
   useEffect(() => {
-    // console.log("Search params:", searchParam);
     searchParam
       ? dispatch(searchTvShowAPI(searchParam, pageParam))
       : dispatch(fetchAllTvShows(pageParam));
@@ -69,6 +63,7 @@ const AllTvShows = () => {
           isSorted: isSorted === "true",
         }}
       />
+
       {allShows?.loading ? (
         <Loader />
       ) : tvShowList?.length > 0 && pageParam < totalPages ? (
@@ -78,6 +73,7 @@ const AllTvShows = () => {
               <TvShowCard data={tvShow} key={index} />
             </div>
           ))}
+          <ToastContainer />
         </div>
       ) : (
         <Page404 errorMsg="No Result Found" />

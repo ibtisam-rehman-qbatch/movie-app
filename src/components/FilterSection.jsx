@@ -5,8 +5,6 @@ import { orderBy, toNumber, groupBy, intersection } from "lodash";
 import { calculateYear } from "../utilities/utils";
 
 const FilterSection = (props) => {
-  // console.log(props.data.country, props.data.network, props.data.isSorted);
-
   const networkWiseShows = groupBy(props.data.allShows, "network");
   const availableNetworks = Object.keys(networkWiseShows);
 
@@ -25,19 +23,9 @@ const FilterSection = (props) => {
     });
   }, [props.data.country, props.data.network, props.data.isSorted]);
 
-  const handleCheckboxChange = (event) => {
-    const isChecked = event.target.checked;
-    setSortByYear(isChecked);
-    handleChangeFilters({
-      country: countrySelected,
-      network: networkSelected,
-      sorted: isChecked,
-    });
-  };
-
   const handleChangeFilters = ({ country, network, sorted }) => {
     let filteredShows = props.data.allShows;
-    // console.log("APPLYING FILTER");
+
     if (country) {
       filteredShows = intersection(countryWiseShows[country], filteredShows);
     }
@@ -56,7 +44,17 @@ const FilterSection = (props) => {
 
     setCountry(country);
     setNetwork(network);
+    setSortByYear(sorted);
     props.data.setTvShowList(filteredShows);
+  };
+
+  const handleChangeCheckbox = (event) => {
+    const isChecked = event.target.checked;
+    handleChangeFilters({
+      country: countrySelected,
+      network: networkSelected,
+      sorted: isChecked,
+    });
   };
 
   const handleChangeCountry = (name) => {
@@ -83,7 +81,7 @@ const FilterSection = (props) => {
             id="checked-checkbox"
             type="checkbox"
             checked={sortByYear}
-            onChange={handleCheckboxChange}
+            onChange={handleChangeCheckbox}
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
           />
           <label

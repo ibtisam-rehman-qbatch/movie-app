@@ -10,9 +10,11 @@ const fetchAllTvShows = (pNum) => {
   return async (dispatch) => {
     try {
       dispatch(actions.fetchTvShowsBegin());
+
       const response = await Axios.get(
         `https://www.episodate.com/api/most-popular?page=${pNum}`
       );
+
       if (isResponseSuccessful(response)) {
         dispatch(actions.fetchTvShowsSuccess(response.data));
       }

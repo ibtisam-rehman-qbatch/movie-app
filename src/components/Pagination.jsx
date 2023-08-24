@@ -1,21 +1,31 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { useSelector } from "react-redux";
+import { toNumber } from "lodash";
 
 import { useNavigate } from "react-router-dom";
 
-const Pagination = ({ searchParam }) => {
+const Pagination = ({ searchParam, pageParam }) => {
   const navigate = useNavigate();
 
   const currPage = useSelector((shows) => shows.showsReducer.summary.page);
   const totalPages = useSelector((shows) => shows.showsReducer.summary.pages);
 
   const pageRange = 5;
+
   const [currentPageRange, setCurrentPageRange] = useState({
     start: 1,
     end: Math.min(pageRange, totalPages) || pageRange,
   });
+
+  useEffect(() => {
+    const newStart = toNumber(pageParam);
+    const newEnd =
+      Math.min(pageRange + (newStart || 1) - 1, totalPages) ||
+      pageRange + (newStart || 1) - 1;
+    setCurrentPageRange({ start: newStart, end: newEnd });
+  }, [pageParam]);
 
   const goToNextPageRange = () => {
     const newStart = currentPageRange.start + pageRange;
@@ -69,7 +79,6 @@ const Pagination = ({ searchParam }) => {
   };
   const loadNextPageContent = () => {
     if (currPage < totalPages) {
-      // dispatch(fetchAllTvShows(currPage + 1));
       if (searchParam)
         navigate(`/all-tv-shows?search=${searchParam}&page=${currPage + 1}`);
       else navigate(`/all-tv-shows?page=${currPage + 1}`);
@@ -78,7 +87,6 @@ const Pagination = ({ searchParam }) => {
   };
   const loadPrevPageContent = () => {
     if (currPage > 1) {
-      // dispatch(fetchAllTvShows(currPage - 1));
       if (searchParam)
         navigate(`/all-tv-shows?search=${searchParam}&page=${currPage - 1}`);
       else navigate(`/all-tv-shows?page=${currPage - 1}`);
@@ -108,7 +116,7 @@ const Pagination = ({ searchParam }) => {
         <div>
           <p className="text-sm text-gray-700">
             Showing <span className="font-medium">{currPage}</span> of{" "}
-            <span className="font-medium">{totalPages}</span> pages
+            <span className="font-medium">{totalPages}</span> totalPages
           </p>
         </div>
         <div>
@@ -123,7 +131,27 @@ const Pagination = ({ searchParam }) => {
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </button>
+            <a
+              href="#"
+              aria-current="page"
+              onClick={() => loadContent(1)}
+              className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold 
+            text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
+            >
+              First
+            </a>
+
             {pageNumber()}
+
+            <a
+              href="#"
+              aria-current="page"
+              onClick={() => loadContent(totalPages)}
+              className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold 
+            text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
+            >
+              Last
+            </a>
 
             <button
               onClick={() => goToNextPageRange()}
@@ -139,4 +167,4 @@ const Pagination = ({ searchParam }) => {
   );
 };
 
-export default React.memo(Pagination);
+export default Pagination;

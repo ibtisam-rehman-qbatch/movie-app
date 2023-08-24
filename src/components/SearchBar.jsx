@@ -1,17 +1,14 @@
 import React from "react";
 import { useRef } from "react";
-// import { searchTvShowAPI } from "../redux/shows/actionCreator";
-// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { debounce } from "lodash";
 const SearchBar = () => {
   const searchInputRef = useRef();
-  // const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const handleSearch = () => {
     if (searchInputRef.current.value) {
-      // dispatch(searchTvShowAPI(searchInputRef.current.value));
       navigate(`/all-tv-shows?search=${searchInputRef.current.value}`);
     } else {
       navigate(`/all-tv-shows`);

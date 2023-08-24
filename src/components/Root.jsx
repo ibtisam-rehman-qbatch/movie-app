@@ -1,16 +1,18 @@
 import React from "react";
 import { Outlet } from "react-router";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const Root = () => {
   return (
     <>
       <Header />
-      <div className="bg-gray-50 h-screen">
+      <div className="bg-gray-50 h-auto">
         <main className="mx-12 md:mx-8 lg:mx-24">
           <Outlet />
         </main>
       </div>
+      <Footer className="fixed bottom-0 " />
     </>
   );
 };
