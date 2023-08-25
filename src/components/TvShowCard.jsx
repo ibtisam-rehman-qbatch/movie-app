@@ -59,10 +59,10 @@ const TvShowCard = (props) => {
               Delete
             </button>
 
-            {props.data?.myDate ? (
+            {props.data?.myShow ? (
               <button
                 onClick={() =>
-                  toast("You don't have any details of your own TV-Show")
+                  toast.error("You don't have any details of your own TV-Show")
                 }
                 className="inline-flex items-center px-2.5 py-2 text-xs font-medium text-center text-white rounded-lg bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
               >

@@ -37,6 +37,7 @@ const AllTvShows = () => {
       dispatch(reInit());
     } else if (allShows?.success) {
       toast.success(allShows?.success);
+
       dispatch(reInit());
     }
   }, [allShows?.error, allShows?.success]);

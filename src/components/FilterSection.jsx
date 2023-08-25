@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import NetworkList from "./NetworkList";
 import { orderBy, toNumber, groupBy, intersection } from "lodash";
 import { calculateYear } from "../utilities/utils";
+import { Formik, Form } from "formik";
 
 const FilterSection = (props) => {
   const networkWiseShows = groupBy(props.data.allShows, "network");
@@ -92,18 +93,22 @@ const FilterSection = (props) => {
           </label>
         </div>
 
-        <div className="flex items-center space-x-4 mr-4 pt-4">
-          <NetworkList
-            handleChange={handleChangeNetwork}
-            availableNetworks={availableNetworks}
-            labelText="Select Network"
-          />
-          <NetworkList
-            handleChange={handleChangeCountry}
-            availableNetworks={availableCountries}
-            labelText="Select Country"
-          />
-        </div>
+        <Formik>
+          <Form>
+            <div className="flex items-center space-x-4 mr-4 pt-4">
+              <NetworkList
+                handleChange={handleChangeNetwork}
+                availableNetworks={availableNetworks}
+                labelText="Select Network"
+              />
+              <NetworkList
+                handleChange={handleChangeCountry}
+                availableNetworks={availableCountries}
+                labelText="Select Country"
+              />
+            </div>
+          </Form>
+        </Formik>
       </div>
     </div>
   );

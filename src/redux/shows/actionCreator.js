@@ -48,6 +48,7 @@ const removeTvShow = (id) => {
       dispatch(actions.deleteTvShowBegin());
 
       dispatch(actions.deleteTvShowSuccess(id));
+      slackNotification('{"text": "Tv-Show has deleted successfully"}');
     } catch (error) {
       dispatch(actions.tvShowsError(error));
 
