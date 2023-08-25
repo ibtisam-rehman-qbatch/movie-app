@@ -28,8 +28,8 @@ const Pagination = ({ searchParam, pageParam }) => {
   }, [pageParam]);
 
   const goToNextPageRange = () => {
-    const newStart = currentPageRange.start + pageRange;
-    const newEnd = currentPageRange.end + pageRange;
+    const newStart = currentPageRange.start + 1;
+    const newEnd = currentPageRange.end + 1;
 
     if (newEnd <= totalPages) {
       setCurrentPageRange({ start: newStart, end: newEnd });
@@ -39,8 +39,8 @@ const Pagination = ({ searchParam, pageParam }) => {
   };
 
   const goToPrevPageRange = () => {
-    const newStart = currentPageRange.start - pageRange;
-    const newEnd = currentPageRange.end - pageRange;
+    const newStart = currentPageRange.start - 1;
+    const newEnd = currentPageRange.end - 1;
 
     if (newStart > 0) {
       setCurrentPageRange({ start: newStart, end: newEnd });
