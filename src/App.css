@@ -1,5 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 .App {
   text-align: center;
+  /* border:3px solid #282c34;
+  margin: 0px 12% 0px 12%;
+  padding-bottom: 20px; */
 }
 
 .App-logo {
@@ -15,13 +23,16 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  color: white;
+  /* min-height: 100vh; */
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  border: #282c34 solid 4px;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  gap: 15px;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+ 
 }
 
 .App-link {
