@@ -49,7 +49,7 @@ const AddTvShow = () => {
   return (
     <>
       <div className="flex items-center justify-center h-screen">
-        <div className="w-1/2 flex flex-col items-center justify-center rounded-lg bg-white p-8 shadow-md">
+        <div className="w-full md:w-1/2  flex flex-col items-center justify-center rounded-lg bg-white p-8 shadow-md">
           <h1 className="mb-4 text-2xl font-bold">Add TV-Show</h1>
 
           <Formik

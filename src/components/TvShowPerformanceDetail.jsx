@@ -3,7 +3,7 @@ import React from "react";
 
 const TvShowPerformanceDetail = ({ tvShowDetail }) => {
   return (
-    <div className="flex justify-center  sm:px-12 sm:flex-col md:px-12 lg:px-30 lg:flex-row lg:space-x-48">
+    <div className="flex justify-center  px-6 flex-col md:px-12 lg:px-30 lg:flex-row lg:space-x-48">
       <div>
         <h1 className="mb-4 text-2xl dark:text-gray-400 font-bold">
           Genres:{" "}
@@ -24,7 +24,10 @@ const TvShowPerformanceDetail = ({ tvShowDetail }) => {
         <h1 className="mb-4 text-2xl dark:text-gray-400 font-bold">
           Rating:{" "}
           <span className=" font-normal">
-            <span className="text-red-600"> {tvShowDetail?.rating}/10 </span>{" "}
+            <span className="text-red-600">
+              {" "}
+              {Math.trunc(parseFloat(tvShowDetail?.rating) * 10) / 10}/10{" "}
+            </span>{" "}
             from{" "}
             <span className="text-red-600">{tvShowDetail?.rating_count}</span>{" "}
             users
