@@ -9,7 +9,7 @@ export const calculateYear = (givenDate) => {
 export const slackNotification = (data) => {
   const config = {
     method: "post",
-    url: "https://hooks.slack.com/services/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",
+    url: "https://hooks.slack.com/services/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",
     headers: {
       "Content-Type": "text/plain",
     },

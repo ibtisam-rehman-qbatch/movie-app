@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import Root from "./components/Root";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+import Loader from "./components/Loader";
 
 const AllTvShows = React.lazy(() =>
   import(/* webpackChunkName: "allTvShows" */ "./pages/AllTvShows")
@@ -23,7 +24,7 @@ function App() {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<Root />}>
               <Route path="/add-tv-show" element={<AddTvShow />} />

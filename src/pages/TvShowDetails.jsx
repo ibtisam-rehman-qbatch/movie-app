@@ -9,7 +9,7 @@ const ImageSlider = React.lazy(() => import("../components/ImageSlider"));
 
 const TvShowDetails = () => {
   const dispatch = useDispatch();
-  const stateData = useSelector((tvShow) => tvShow.showsReducer);
+  const stateData = useSelector((state) => state.showsReducer);
 
   const params = useParams();
 
@@ -24,21 +24,19 @@ const TvShowDetails = () => {
       ) : (
         <div>
           <div className="grid place-items-center pt-4 md:pb-6">
-            <h1 className="text-4xl font-extrabold text-red-500 md:pb-6">
+            <h1 className="text-4xl font-extrabold md:pb-6">
               {stateData?.tvShowDetail?.name}
             </h1>
             <div />
             {/* lg:p-12 lg:justify-between lg:space-x-12   lg:flex-row md:flex-col  md:space-y-8 items-center space-y-8 */}
             <div className="flex flex-col lg:flex-row lg:space-x-12">
-              {/* flex flex-col lg:flex-row lg:space-x-12  */}
-              {/* {false && ( */}
               <Suspense fallback={<div>loading...</div>}>
                 <ImageSlider
                   images={stateData?.tvShowDetail?.pictures}
                   backUpImg={stateData?.tvShowDetail?.image_thumbnail_path}
                 />
               </Suspense>
-              {/* )} */}
+
               <div className="h-full lg:w-2/3">
                 <p className="mb-4 text-lg  dark:text-gray-400 font-bold">
                   When will be {stateData?.tvShowDetail?.name} next episode air
