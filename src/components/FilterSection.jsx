@@ -95,7 +95,7 @@ const FilterSection = (props) => {
 
         <Formik>
           <Form>
-            <div className="flex items-center space-x-4 mr-4 pt-4">
+            <div className="flex items-center justify-center mr-4 pt-4 flex-row space-x-4 ">
               <NetworkList
                 handleChange={handleChangeNetwork}
                 availableNetworks={availableNetworks}

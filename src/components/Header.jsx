@@ -8,7 +8,7 @@ const Header = () => {
     "inline-flex items-center py-2 pl-3 pr-4  text-l font-medium text-center text-white hover:border hover:border-white rounded-lg hover:text-white hover:bg-gray-600 focus:ring-1 focus:outline-none focus:ring-gray-600";
   return (
     <>
-      <nav className=" border-gray-200 bg-gray-800 w-screen">
+      <nav className=" border-gray-200 bg-gray-800 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <NavLink to="/all-tv-shows" className="flex items-center">
             <img src={movie_logo} className="h-8 mr-3" alt="Cinema-site logo" />
