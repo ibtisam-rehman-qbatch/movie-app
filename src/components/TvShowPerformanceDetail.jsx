@@ -26,8 +26,8 @@ const TvShowPerformanceDetail = ({ tvShowDetail }) => {
           <span className=" font-normal">
             <span className="text-red-600">
               {" "}
-              {/* {Math.trunc(parseFloat(tvShowDetail?.rating) * 10) / 10}/10{" "} */}
-              {tvShowDetail?.rating}/10{" "}
+              {Math.trunc(parseFloat(tvShowDetail?.rating) * 10) / 10}/10{" "}
+              {/* {tvShowDetail?.rating}/10{" "} */}
             </span>{" "}
             from{" "}
             <span className="text-red-600">{tvShowDetail?.rating_count}</span>{" "}

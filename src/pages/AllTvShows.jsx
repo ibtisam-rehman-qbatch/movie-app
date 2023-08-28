@@ -68,7 +68,7 @@ const AllTvShows = () => {
       {allShows?.loading ? (
         <Loader />
       ) : tvShowList?.length > 0 && pageParam < totalPages ? (
-        <div className="grid grid-cols-1 items-center pt-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1  mx-20 justify-center pt-8 xs:mx-0 md:mx-0 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {tvShowList?.map((tvShow, index) => (
             <div key={index}>
               <TvShowCard data={tvShow} key={index} />
