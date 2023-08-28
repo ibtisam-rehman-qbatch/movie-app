@@ -6,18 +6,18 @@ import { calculateYear } from "../utilities/utils";
 import { toast } from "react-toastify";
 import { viewDetailsIcon, deleteIcon } from "../assets/svg/icons";
 
-const TvShowCard = (props) => {
+const TvShowCard = ({ data }) => {
   const [isConfirmationVisible, setConfirmationVisible] = useState(false);
 
-  const startDate = props.data.start_date;
-  const endDate = props.data.end_date;
+  const startDate = data.start_date;
+  const endDate = data.end_date;
 
   return (
     <>
       <div
         className="relative w-full max-w-xs bg-white border flex justify-center border-gray-200 rounded-lg shadow"
         style={{
-          backgroundImage: `url(${props.data.image_thumbnail_path})`,
+          backgroundImage: `url(${data.image_thumbnail_path})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "100% 200px",
         }}
@@ -25,7 +25,7 @@ const TvShowCard = (props) => {
         <div className="px-5 w-11/12 mt-36 pt-4 pb-6 bg-gray-50 shadow-lg hover:shadow-xl shadow-black-600 rounded-lg">
           <a href="#">
             <p className="text-xl  font-bold text-gray-900  overflow-hidden whitespace-nowrap overflow-ellipsis">
-              {props.data.name}{" "}
+              {data.name}{" "}
             </p>
             {endDate ? (
               <p className="text-l font-semibold tracking-tight text-gray-400">
@@ -47,7 +47,7 @@ const TvShowCard = (props) => {
               Delete
             </button>
 
-            {props.data?.myShow ? (
+            {data?.myShow ? (
               <button
                 onClick={() =>
                   toast.error("You don't have any details of your own TV-Show")
@@ -59,7 +59,7 @@ const TvShowCard = (props) => {
               </button>
             ) : (
               <Link
-                to={`/tv-show-details/${props.data.id}`}
+                to={`/tv-show-details/${data.id}`}
                 className="inline-flex items-center px-2.5 py-2 text-xs font-medium text-center text-white rounded-lg bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
               >
                 {viewDetailsIcon()}
@@ -68,7 +68,7 @@ const TvShowCard = (props) => {
             )}
             {isConfirmationVisible && (
               <DeleteConfirmation
-                data={{ id: props.data.id, setConfirmationVisible }}
+                data={{ id: data.id, setConfirmationVisible }}
               />
             )}
           </div>

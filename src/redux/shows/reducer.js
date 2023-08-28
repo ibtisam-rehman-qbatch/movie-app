@@ -1,6 +1,5 @@
 import actions from "./actions";
-import { calculateYear } from "../../utilities/utils";
-import { sortBy, toNumber, takeWhile, unionBy } from "lodash";
+import { toNumber, takeWhile, unionBy } from "lodash";
 const initialState = {
   tvShows: [],
   summary: {},
@@ -35,6 +34,7 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, loading: true, success: null, error: null };
 
     case actions.ADD_TV_SHOW_SUCCESS: {
+      // bad logic
       const newTotal = toNumber(state.summary.total) + 1;
       myTvShowId = myTvShowId - 1;
       payload.id = myTvShowId;
@@ -135,19 +135,6 @@ export default (state = initialState, { type, payload }) => {
         error: null,
       };
 
-    case actions.SORT_TV_SHOWS_BEGIN:
-      return { ...state, loading: true, success: null, error: null };
-
-    case actions.SORT_TV_SHOWS_SUCCESS:
-      return {
-        ...state,
-        tvShows: sortBy(state.tvShows, (show) =>
-          toNumber(calculateYear(show.start_date))
-        ),
-        success: true,
-        loading: false,
-        error: null,
-      };
     case actions.REINITIALIZE:
       return { ...state, success: null, loading: false, error: null };
     case actions.API_ERROR:

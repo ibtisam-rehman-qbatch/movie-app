@@ -94,19 +94,6 @@ const actions = {
     };
   },
 
-  sortTvShowsBegin: () => {
-    return {
-      type: actions.SORT_TV_SHOWS_BEGIN,
-    };
-  },
-
-  sortTvShowsSuccess: (field) => {
-    return {
-      type: actions.SORT_TV_SHOWS_SUCCESS,
-      payload: field,
-    };
-  },
-
   searchTvShowsAPIBegin: () => {
     return {
       type: actions.SEARCH_TV_SHOWS_API_BEGIN,

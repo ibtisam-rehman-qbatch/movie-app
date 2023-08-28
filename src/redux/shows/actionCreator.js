@@ -6,13 +6,16 @@ const isResponseSuccessful = (response) => {
   return response.status >= 200 && response.status < 300;
 };
 
+// eslint-disable-next-line no-undef
+const tvShowsUrl = process.env.REACT_APP_TVSHOWS_URL;
+
 const fetchAllTvShows = (pNum) => {
   return async (dispatch) => {
     try {
       dispatch(actions.fetchTvShowsBegin());
 
       const response = await Axios.get(
-        `https://www.episodate.com/api/most-popular?page=${pNum}`
+        `${tvShowsUrl}/most-popular?page=${pNum}`
       );
 
       if (isResponseSuccessful(response)) {
@@ -21,7 +24,7 @@ const fetchAllTvShows = (pNum) => {
     } catch (error) {
       dispatch(actions.tvShowsError(error));
 
-      var raw = '{"text": "There\'s error during fetching Tv-Shows"}';
+      const raw = '{"text": "There\'s error during fetching Tv-Shows"}';
       slackNotification(raw);
     }
   };
@@ -36,7 +39,7 @@ const addTvShow = (data) => {
     } catch (error) {
       dispatch(actions.tvShowsError(error));
 
-      var raw = '{"text": "There\'s error during adding a Tv-Show"}';
+      const raw = '{"text": "There\'s error during adding a Tv-Show"}';
       slackNotification(raw);
     }
   };
@@ -52,7 +55,7 @@ const removeTvShow = (id) => {
     } catch (error) {
       dispatch(actions.tvShowsError(error));
 
-      var raw = '{"text": "There\'s error during removing a Tv-Show"}';
+      const raw = '{"text": "There\'s error during removing a Tv-Show"}';
       slackNotification(raw);
     }
   };
@@ -67,7 +70,7 @@ const editTvShow = (id, updatedTvShow) => {
     } catch (error) {
       dispatch(actions.tvShowsError(error));
 
-      var raw = '{"text": "There\'s error during editing a Tv-Show Details"}';
+      const raw = '{"text": "There\'s error during editing a Tv-Show Details"}';
       slackNotification(raw);
     }
   };
@@ -79,28 +82,14 @@ const searchTvShowAPI = (searchQuery, pageNum) => {
       dispatch(actions.searchTvShowsAPIBegin());
 
       const response = await Axios.get(
-        `https://www.episodate.com/api/search?q=${searchQuery}&page=${pageNum}`
+        `${tvShowsUrl}/search?q=${searchQuery}&page=${pageNum}`
       );
 
       dispatch(actions.searchTvShowsAPISuccess(response.data));
     } catch (error) {
       dispatch(actions.tvShowsError(error));
-      var raw = '{"text": "There\'s error during showing Searching a Tv Show"}';
-      slackNotification(raw);
-    }
-  };
-};
-
-const sortTvShows = (field = "start_date") => {
-  return async (dispatch) => {
-    try {
-      dispatch(actions.sortTvShowsBegin());
-
-      dispatch(actions.sortTvShowsSuccess(field));
-    } catch (error) {
-      dispatch(actions.tvShowsError(error));
-
-      var raw = '{"text": "There\'s error during Sorting Tv-Shows"}';
+      const raw =
+        '{"text": "There\'s error during showing Searching a Tv Show"}';
       slackNotification(raw);
     }
   };
@@ -111,14 +100,14 @@ const tvShowDetails = (searchQuery) => {
     try {
       dispatch(actions.tvShowDetailsBegin());
       const response = await Axios.get(
-        `https://www.episodate.com/api/show-details?q=${searchQuery}`
+        `${tvShowsUrl}/show-details?q=${searchQuery}`
       );
 
       dispatch(actions.tvShowDetailsSuccess(response.data.tvShow));
     } catch (error) {
       dispatch(actions.tvShowsError(error));
 
-      var raw = '{"text": "There\'s error during showing Tv-Show Details"}';
+      const raw = '{"text": "There\'s error during showing Tv-Show Details"}';
       slackNotification(raw);
     }
   };
@@ -130,7 +119,7 @@ const reInit = () => {
       dispatch(actions.reinitializeSuccess());
     } catch (error) {
       dispatch(actions.tvShowsError(error));
-      var raw =
+      const raw =
         '{"text": "There\'s error during reinitializing Tv-Show state"}';
       slackNotification(raw);
     }
@@ -144,6 +133,5 @@ export {
   editTvShow,
   searchTvShowAPI,
   tvShowDetails,
-  sortTvShows,
   reInit,
 };

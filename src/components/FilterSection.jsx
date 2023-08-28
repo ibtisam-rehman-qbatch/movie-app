@@ -5,27 +5,27 @@ import { orderBy, toNumber, groupBy, intersection } from "lodash";
 import { calculateYear } from "../utilities/utils";
 import { Formik, Form } from "formik";
 
-const FilterSection = (props) => {
-  const networkWiseShows = groupBy(props.data.allShows, "network");
+const FilterSection = ({ data }) => {
+  const networkWiseShows = groupBy(data.allShows, "network");
   const availableNetworks = Object.keys(networkWiseShows);
 
-  const countryWiseShows = groupBy(props.data.allShows, "country");
+  const countryWiseShows = groupBy(data.allShows, "country");
   const availableCountries = Object.keys(countryWiseShows);
 
-  const [sortByYear, setSortByYear] = useState(props.data.isSorted);
-  const [countrySelected, setCountry] = useState(props.data.country);
-  const [networkSelected, setNetwork] = useState(props.data.network);
+  const [sortByYear, setSortByYear] = useState(data.isSorted);
+  const [countrySelected, setCountry] = useState(data.country);
+  const [networkSelected, setNetwork] = useState(data.network);
 
   useEffect(() => {
     handleChangeFilters({
-      country: props.data.country,
-      network: props.data.network,
-      sorted: props.data.isSorted,
+      country: data.country,
+      network: data.network,
+      sorted: data.isSorted,
     });
-  }, [props.data.country, props.data.network, props.data.isSorted]);
+  }, [data.country, data.network, data.isSorted]);
 
   const handleChangeFilters = ({ country, network, sorted }) => {
-    let filteredShows = props.data.allShows;
+    let filteredShows = data.allShows;
 
     if (country) {
       filteredShows = intersection(countryWiseShows[country], filteredShows);
@@ -46,7 +46,7 @@ const FilterSection = (props) => {
     setCountry(country);
     setNetwork(network);
     setSortByYear(sorted);
-    props.data.setTvShowList(filteredShows);
+    data.setTvShowList(filteredShows);
   };
 
   const handleChangeCheckbox = (event) => {
